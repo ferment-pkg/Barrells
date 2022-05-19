@@ -17,8 +17,10 @@ class bitgit(Barrells):
         subprocess.run(["go", "build"], cwd=self.cwd)
         return True
     def uninstall(self) -> bool:
-        os.remove("/usr/local/bin/bit")
-        return super().uninstall()
+        try:
+            os.remove("/usr/local/bin/bit")
+        finally:
+            return super().uninstall()
     def test(self):
         subprocess.run(["git", "init", "/tmp/testDir"])
         subprocess.run(["touch", "/tmp/testDir/test.txt"])
