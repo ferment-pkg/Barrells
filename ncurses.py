@@ -1,11 +1,8 @@
 # Created With Barrell Tool https://ferment.tk/create
-import os
 import subprocess
-import sys
-
 from index import Barrells
-
-
+import os
+import sys
 class ncurses(Barrells):
     def __init__(self):
         self.description = "Ncurses"
@@ -13,7 +10,7 @@ class ncurses(Barrells):
         self.git = False
         self.lib = True
         self.dependencies = ["pkg-config"]
-
+    
     def install(self):
         with open("/tmp/ncurses.log", "a") as sys.stdout:
             os.chdir(self.cwd)
@@ -48,3 +45,4 @@ class ncurses(Barrells):
                 os.remove(f"/usr/local/lib/pkgconfig/{sym}")
         finally:
             return super().uninstall()
+    
