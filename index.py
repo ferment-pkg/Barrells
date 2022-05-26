@@ -1,11 +1,14 @@
+import os
 import subprocess
 from typing import Optional
-import os
+
+
 class Barrells:
-    def __init__(self):        
+    def __init__(self):
         self.url:str
         self.description:str
         self.homepage:str
+        self.prebuild:Optional[Prebuild]
         self.version:str
         self.git:bool
         self.license:str
@@ -44,3 +47,12 @@ class Barrells:
         os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
     def runcmdincwd(self, cmd):
         return subprocess.run(cmd, cwd=self.cwd)
+class Prebuild():
+    def __init__(self,amd64:Optional[str], arm64:Optional[str]):
+        self.amd64=amd64
+        self.arm64=arm64
+        self.cwd:str
+    def install(self):
+        return bool
+    def uninstall(self):
+        return bool
