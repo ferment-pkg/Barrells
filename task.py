@@ -9,7 +9,7 @@ class task(Barrells):
         self.license="MIT"
         self.description="Feature-rich console based todo list manager"
         self.homepage="https://taskwarrior.org/"
-        self.dependencies=["cmake","gcc", "gnutils"]
+        self.dependencies=["cmake"]
     def install(self):
         subprocess.call(["cmake","-DCMAKE_BUILD_TYPE=release","."], cwd=self.cwd, stdout=sys.stdout)
         subprocess.call(["make"], cwd=self.cwd, stdout=sys.stdout)
