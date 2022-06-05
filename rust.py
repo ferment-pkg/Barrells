@@ -6,9 +6,7 @@ from index import Barrells
 
 class rust(Barrells):
     def __init__(self):
-        self.description = (
-            "A language empowering everyone to build reliable and efficient software"
-        )
+        self.description = "A language empowering everyone to build reliable and efficient software"
         self.url = "interactive:sh:https://sh.rustup.rs"
         self.git = False
         self.lib = False
