@@ -18,6 +18,7 @@ class Barrells:
         self.dependencies:list[str]
         self.binary:str
         self.lib:bool
+        self.setup:bool=False
         #Provided by the cmd
         self.cwd:str
     def install(self)->bool:
@@ -56,3 +57,4 @@ class Prebuild():
         return bool
     def uninstall(self):
         return bool
+
