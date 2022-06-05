@@ -21,5 +21,10 @@ class rust(Barrells):
         return super().install()
 
     def uninstall(self) -> bool:
-        subprocess.call(["rustup", "uninstall"])
+        subprocess.run(
+            ["rustup", "self", "uninstall"],
+            input=b"y\n",
+            stdout=open("/tmp/uninstall.log", "a"),
+            stderr=open("/tmp/uninstall.log", "a"),
+        )
         return super().uninstall()
