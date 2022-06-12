@@ -1,6 +1,10 @@
 import os
 import subprocess
+import sys
+
 from index import Barrells
+
+
 class smartmontools(Barrells):
     def __init__(self):
         self.url='https://downloads.sourceforge.net/project/smartmontools/smartmontools/7.3/smartmontools-7.3.tar.gz'
@@ -16,6 +20,12 @@ class smartmontools(Barrells):
         os.symlink(os.path.join(self.cwd, "built", "sbin", "smartctl"), '/usr/local/bin/smartctl')
         os.symlink(os.path.join(self.cwd, "built", "sbin", "smartd"),  '/usr/local/bin/smartd')
         return super().install()
+    def build(self) -> bool:
+        with open("/tmp/fermenter/smartmontools/build.log", "a") as sys.stdout:
+            os.chdir(self.cwd)
+            args=["--disable-dependency-tracking", "--with-savestates", "--with-attributelog"]
+            subprocess.call(["sh","configure", f"--prefix={self.cwd}/built", *args], stdout=sys.stdout, stderr=sys.stderr)
+            subprocess.call(["make"], stdout=sys.stdout, stderr=sys.stderr)
     def uninstall(self) -> bool:
         try:
             os.remove(os.path.join("/usr/local/", "bin", "smartctl"))

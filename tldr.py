@@ -1,6 +1,10 @@
 import os
 import subprocess
+import sys
+
 from index import Barrells
+
+
 class tldr(Barrells):
     def __init__(self):
         self.url="https://github.com/tldr-pages/tldr-c-client/archive/v1.4.3.tar.gz"
@@ -19,3 +23,8 @@ class tldr(Barrells):
             os.remove("/usr/local/bin/tldr")
         finally:
             return super().uninstall()
+    def build(self) -> bool:
+        with open("/tmp/tldr.log", 'a') as sys.stdout:
+            os.chdir(self.cwd)
+            os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
+            subprocess.run(['make'], stdout=sys.stdout, stderr=sys.stdout)
