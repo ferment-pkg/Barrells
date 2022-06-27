@@ -18,6 +18,8 @@ class bitgit(Barrells):
         with open("/tmp/bitgit.log", "a") as sys.stdout:
             subprocess.run(["go", "build"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
             return True
+    def build(self) -> bool:
+        return self.install()
     def uninstall(self) -> bool:
         try:
             os.remove("/usr/local/bin/bit")
