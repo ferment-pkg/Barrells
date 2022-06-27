@@ -1,6 +1,7 @@
 import os
 from index import Barrells
 import subprocess
+import sys
 class bitgit(Barrells):
     def __init__(self):
         Barrells.__init__(self)
@@ -14,8 +15,9 @@ class bitgit(Barrells):
         self.dependencies=["go", "curl", "git"]
         self.binary="bit"
     def install(self):
-        subprocess.run(["go", "build"], cwd=self.cwd)
-        return True
+        with open("/tmp/bitgit.log", "a") as sys.stdout:
+            subprocess.run(["go", "build"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
+            return True
     def uninstall(self) -> bool:
         try:
             os.remove("/usr/local/bin/bit")
