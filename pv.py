@@ -20,8 +20,14 @@ class pv(Barrells):
         os.chdir(self.cwd)
         subprocess.call(["sh", "./configure", *args])
         subprocess.call(["make"])
-        subprocess.call(["make", "uninstall"])
-
+        subprocess.call(["make", "install"])
+    def build(self):
+ 	    import subprocess
+        args = ["--prefix=/usr/local/", "--disable-nls"]
+        import os
+        os.chdir(self.cwd)
+        subprocess.call(["sh", "./configure", *args])
+        subprocess.call(["make"])   
     def uninstall(self):
         import os
 
