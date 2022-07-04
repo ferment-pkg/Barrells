@@ -35,4 +35,4 @@ jobs:
             fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
-        run: ferment upgrade
+        run: /Users/runner/work/ferment/ferment upgrade
