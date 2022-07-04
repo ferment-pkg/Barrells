@@ -13,12 +13,14 @@ jobs:
           repository: ferment-pkg/fermenter
       - name: Install Fermenter
         run: install bin/darwin/fermenter /usr/local/bin
-      - name: Clone ferment
-        uses: actions/checkout@master
-        with:
-          repository: ferment-pkg/ferment
-          path: /Users/runner/work/ferment
-          submodules: recursive
+      # - name: Clone ferment
+      #   uses: actions/checkout@master
+      #   with:
+      #     repository: ferment-pkg/ferment
+      #     path: /Users/runner/work/ferment
+      #     submodules: recursive
+      - name: Clone Ferment
+        run: git clone --depth 1 --branch master --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
       - name: Install Ferment
         run: sh install.sh
       - id: files
