@@ -1,0 +1,30 @@
+name: Build and upload
+on: [push]
+defaults:
+  run:
+    shell: zsh
+jobs:
+  Build:
+    runs-on: macos-latest
+    steps:
+      - name: Clone fermenter
+        uses: actions/checkout@master
+        with:
+          repository: ferment-pkg/fermenter
+      - name: Install Fermenter
+        run: install bin/darwin/fermenter /usr/local/bin
+      - name: Clone ferment
+        uses: actions/checkout@master
+        with:
+          repository: ferment-pkg/ferment
+      - name: Install Ferment
+        run: ./install.sh
+      - name: Ferment barrells
+        id: files
+        uses: jitterbit/get-changed-files@v1
+        run: |
+          for changed_file in ${{ steps.files.outputs.all }}; do
+            fermenter build ${changed_file%.py}
+          done
+      - name: Finish
+        run: ferment upgrade
