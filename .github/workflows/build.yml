@@ -30,6 +30,10 @@ jobs:
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
+            if ![[ $changed_file == *.py ]]; then
+              echo "Skipping $changed_file"
+              continue
+            fi
             fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
