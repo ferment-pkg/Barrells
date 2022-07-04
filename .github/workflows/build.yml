@@ -2,7 +2,7 @@ name: Build and upload
 on: [push]
 defaults:
   run:
-    shell: zsh
+    shell: bash
 jobs:
   Build:
     runs-on: macos-latest
