@@ -22,11 +22,9 @@ jobs:
       - name: Clone Ferment
         run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
       - name: Install Ferment
-        run: sh install.sh
+        run: sh install.sh && source ~/.zshrc
       - id: files
         uses: jitterbit/get-changed-files@v1
-      - name: ls
-        run: ls -la /Users/runner/work/Barrells/Barrells
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
