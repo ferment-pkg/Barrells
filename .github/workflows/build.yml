@@ -19,9 +19,9 @@ jobs:
           repository: ferment-pkg/ferment
       - name: Install Ferment
         run: ./install.sh
-      - name: Ferment barrells
-        id: files
+      - id: files
         uses: jitterbit/get-changed-files@v1
+      - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
             fermenter build ${changed_file%.py}
