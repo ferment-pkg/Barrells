@@ -20,7 +20,7 @@ jobs:
       #     path: /Users/runner/work/ferment
       #     submodules: recursive
       - name: Clone Ferment
-        run: git clone --depth 1 --branch master --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
+        run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
       - name: Install Ferment
         run: sh install.sh
       - id: files
