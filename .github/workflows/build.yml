@@ -13,13 +13,11 @@ jobs:
           repository: ferment-pkg/fermenter
       - name: Install Fermenter
         run: install bin/darwin/fermenter /usr/local/bin
-      - name: Make ferment dir
-        run: mkdir -p /usr/local/ferment
       - name: Clone ferment
         uses: actions/checkout@master
         with:
           repository: ferment-pkg/ferment
-          path: /usr/local/ferment/
+          path: /Users/runner/work/ferment
           submodules: recursive
       - name: Install Ferment
         run: sh install.sh
@@ -28,7 +26,7 @@ jobs:
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            fermenter build ${changed_file%.py} --barrells=/usr/local/ferment/Barrells
+            fermenter build ${changed_file%.py} --barrells=/Users/runner/work/ferment/Barrells
           done
       - name: Finish
         run: ferment upgrade
