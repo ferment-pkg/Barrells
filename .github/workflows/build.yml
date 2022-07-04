@@ -25,10 +25,12 @@ jobs:
         run: sh install.sh
       - id: files
         uses: jitterbit/get-changed-files@v1
+      - name: ls
+        run: ls -la /Users/runner/work/Barrells
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            fermenter build ${changed_file%.py} --barrells=/Users/runner/work/ferment/Barrells
+            fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells
           done
       - name: Finish
         run: ferment upgrade
