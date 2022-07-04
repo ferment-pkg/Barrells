@@ -22,7 +22,7 @@ jobs:
       - name: Clone Ferment
         run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
       - name: Install Ferment
-        run: sh install.sh && source ~/.zshrc
+        run: sh install.sh
       - id: files
         uses: jitterbit/get-changed-files@v1
       - name: Ferment barrells
