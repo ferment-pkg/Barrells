@@ -25,6 +25,8 @@ jobs:
         run: sh install.sh
       - id: files
         uses: jitterbit/get-changed-files@v1
+      - run: ls ~/work/Barrells/
+      - run: ls ~/work/Barrrells/Barrells
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
