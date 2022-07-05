@@ -16,7 +16,7 @@ class bitgit(Barrells):
         self.version="1.1.2"
         self.dependencies=["go", "curl", "git"]
         self.binary="bit"
-        self.prebuild=Prebuild(self)
+        self.prebuild=prebuild(self)
     def install(self):
         with open("/tmp/bitgit.log", "a") as sys.stdout:
             subprocess.run(["go", "build"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)

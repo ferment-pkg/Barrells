@@ -9,7 +9,7 @@ class smartmontools(Barrells):
     def __init__(self):
         self.url='https://downloads.sourceforge.net/project/smartmontools/smartmontools/7.3/smartmontools-7.3.tar.gz'
         self.git=False
-        self.description="smartmontools is a set of utilities to monitor hard drives and other storage devices. "
+        self.description="smartmontools is a set of utilities to monitor hard drives and other storage devices.  "
         self.dependencies=["autoconf", "automake"]
     def install(self) -> bool:
         os.chdir(self.cwd)
