@@ -7,7 +7,7 @@ jobs:
   Build:
     runs-on: macos-latest
     steps:
-      - run: ls&& echo $PWD
+      - run: git clone https://github.com/ferment-pkg/Barrells .
       - name: Clone fermenter
         run: git clone --depth 1 --recursive https://github.com/ferment-pkg/fermenter /Users/runner/work/Barrells/fermenter
         # uses: actions/checkout@master
