@@ -1,10 +1,12 @@
 import os
-from index import Barrells
 import subprocess
 import sys
+
+from index import Barrells, Prebuild
+
+
 class bitgit(Barrells):
     def __init__(self):
-        Barrells.__init__(self)
         self.git=False
         self.url="https://github.com/chriswalz/bit/archive/v1.1.2.tar.gz"
         self.description="Bit is a modern Git CLI"
@@ -14,12 +16,21 @@ class bitgit(Barrells):
         self.version="1.1.2"
         self.dependencies=["go", "curl", "git"]
         self.binary="bit"
+        self.prebuild=Prebuild(self)
     def install(self):
         with open("/tmp/bitgit.log", "a") as sys.stdout:
             subprocess.run(["go", "build"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
             return True
     def build(self) -> bool:
-        return self.install()
+           with open("/tmp/bitgit.log", "a") as sys.stdout:
+            subprocess.run(["go", "build", "-o", "x86-bitgit"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
+            print("Building for arm64 now")
+            os.environ["GOARCH"]="arm64"
+            subprocess.run(["go", "build", "-o", "arm64-bitgit"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.call(["lipo", "-create", "-output","bit","x86-bitgit", "arm64-bitgit" ], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
+            os.chdir(self.cwd)
+            os.remove("x86-bitgit")
+            os.remove("arm64-bitgit")
     def uninstall(self) -> bool:
         try:
             os.remove("/usr/local/bin/bit")
@@ -36,4 +47,12 @@ class bitgit(Barrells):
         else:
             print("False")
             return False
-        
+
+#prebuild install here ->
+class prebuild(Prebuild):
+    def __init__(self):
+        self.amd64="ferment://bitgit@bitgit.tar.gz"
+        self.arm64="ferment://bitgit@bitgit.tar.gz"
+    def install(self):
+        os.chdir(self.cwd)
+        os.symlink(f"{self.cwd}/bit", "/usr/local/bin/bit")
