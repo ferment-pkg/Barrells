@@ -32,6 +32,7 @@ jobs:
               echo "Skipping $changed_file"
               continue
             fi
+            echo PKG ${changed_file%.py}
             fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
