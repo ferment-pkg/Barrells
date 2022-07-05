@@ -11,7 +11,6 @@ class smartmontools(Barrells):
         self.git=False
         self.description="smartmontools is a set of utilities to monitor hard drives and other storage devices."
         self.dependencies=["autoconf", "automake"]
-        self.lib=False
     def install(self) -> bool:
         os.chdir(self.cwd)
         args=["--disable-dependency-tracking", "--with-savestates", "--with-attributelog"]
