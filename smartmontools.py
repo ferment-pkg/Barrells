@@ -14,22 +14,20 @@ class smartmontools(Barrells):
     def install(self) -> bool:
         os.chdir(self.cwd)
         args=["--disable-dependency-tracking", "--with-savestates", "--with-attributelog"]
-        subprocess.call(["sh","configure", f"--prefix={self.cwd}/built", *args])
+        subprocess.call(["sh","configure", f"--prefix=/usr/local/", *args])
         subprocess.call(["make"])
         subprocess.call(["make","install"])
-        os.symlink(os.path.join(self.cwd, "built", "sbin", "smartctl"), '/usr/local/bin/smartctl')
-        os.symlink(os.path.join(self.cwd, "built", "sbin", "smartd"),  '/usr/local/bin/smartd')
         return super().install()
     def build(self) -> bool:
         with open("/tmp/fermenter/smartmontools/build.log", "a") as sys.stdout:
             os.chdir(self.cwd)
             args=["--disable-dependency-tracking", "--with-savestates", "--with-attributelog"]
-            subprocess.call(["sh","configure", f"--prefix={self.cwd}/built", *args], stdout=sys.stdout, stderr=sys.stderr)
+            subprocess.call(["sh","configure", f"--prefix=/usr/local/", *args], stdout=sys.stdout, stderr=sys.stderr)
             subprocess.call(["make"], stdout=sys.stdout, stderr=sys.stderr)
     def uninstall(self) -> bool:
         try:
-            os.remove(os.path.join("/usr/local/", "bin", "smartctl"))
-            os.remove(os.path.join("/usr/local/" "bin", "smartd"))
+            os.chdir(self.cwd)
+            subprocess.call(["make","uninstall"])
         finally:
             return super().uninstall()
     def test(self) -> bool:
