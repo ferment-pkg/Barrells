@@ -11,6 +11,8 @@ jobs:
         uses: actions/checkout@master
         with:
           repository: ferment-pkg/fermenter
+          path: /Users/runner/work/Barrells/fermenter
+
       - name: Install Fermenter
         run: install bin/darwin/fermenter /usr/local/bin
       # - name: Clone ferment
@@ -20,9 +22,10 @@ jobs:
       #     path: /Users/runner/work/ferment
       #     submodules: recursive
       - name: Clone Ferment
-        run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/ferment
+        run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/Barrells/ferment
       - name: Install Ferment
-        run: sh install.sh
+        run: cd /Users/runner/work/Barrells/ferment && sh install.sh
+      - run: export PATH=$PATH:/Users/runner/work/Barrells/ferment
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: ls ~/work/Barrells/
@@ -38,4 +41,4 @@ jobs:
             fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
-        run: /Users/runner/work/ferment/ferment upgrade
+        run: /Users/runner/work/Barrells/ferment/ferment upgrade
