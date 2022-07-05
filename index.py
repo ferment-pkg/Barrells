@@ -49,9 +49,9 @@ class Barrells:
     def runcmdincwd(self, cmd):
         return subprocess.run(cmd, cwd=self.cwd)
 class Prebuild():
-    def __init__(self,amd64:Optional[str], arm64:Optional[str]):
-        self.amd64=amd64
-        self.arm64=arm64
+    def __init__(self):
+        self.amd64:str
+        self.arm64:str
         self.cwd:str
     def install(self):
         return bool
