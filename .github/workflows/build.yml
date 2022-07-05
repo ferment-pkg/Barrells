@@ -8,13 +8,14 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Clone fermenter
-        uses: actions/checkout@master
-        with:
-          repository: ferment-pkg/fermenter
-          path: /Users/runner/work/Barrells/fermenter
+        run: git clone --depth 1 --recursive https://github.com/ferment-pkg/fermenter /Users/runner/work/Barrells/fermenter
+        # uses: actions/checkout@master
+        # with:
+        #   repository: ferment-pkg/fermenter
+        #   path: /Users/runner/work/Barrells/fermenter
 
       - name: Install Fermenter
-        run: install bin/darwin/fermenter /usr/local/bin
+        run: install /Users/runner/work/Barrells/fermenter/bin/darwin/fermenter /usr/local/bin
       # - name: Clone ferment
       #   uses: actions/checkout@master
       #   with:
