@@ -30,8 +30,11 @@ class sdl2(Barrells):
             os.chdir(self.cwd)
             import subprocess
             args=["--prefix=/usr/local/"]
-            subprocess.call(["sh", "./configure", *args], env=[f"CC={self.cwd}/build-scripts/clang-fat.sh"], stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["make", f"-j{os.cpu_count}"], stdout=sys.stdout, stderr=sys.stdout)
+            env=os.environ.copy()
+            env["CC"]=f"{self.cwd}/build-scripts/clang-fat.sh"
+            env["CXX"]=f"{self.cwd}/build-scripts/clang++-fat.sh"
+            subprocess.run(["sh", "./configure", *args], env=env, stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.run(["make", f"-j{os.cpu_count}"], stdout=sys.stdout, stderr=sys.stdout)
     def uninstall(self) -> bool:
         subprocess.call(["make", "uninstall"])
         return super().uninstall()
