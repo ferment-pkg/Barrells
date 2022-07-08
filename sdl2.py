@@ -28,7 +28,7 @@ class sdl2(Barrells):
         os.chdir(self.cwd)
         import subprocess
         args=["--prefix=/usr/local/"]
-        subprocess.call(["sh", "configure"], env=[f"CC={self.cwd}/build-scripts/clang-fat.sh"])
+        subprocess.call(["sh", "configure", *args], env=[f"CC={self.cwd}/build-scripts/clang-fat.sh"])
         subprocess.call(["make"])
     def uninstall(self) -> bool:
         subprocess.call(["make", "uninstall"])
