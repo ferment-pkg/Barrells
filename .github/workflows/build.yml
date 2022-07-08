@@ -32,6 +32,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: ls ~/work/Barrells/
       - run: ls ~/work/Barrells/Barrells
+      - run: ls ~/work/Barrells/ferment
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
