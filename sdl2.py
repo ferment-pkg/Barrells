@@ -34,7 +34,7 @@ class sdl2(Barrells):
             env["CC"]=f"{self.cwd}/build-scripts/clang-fat.sh"
             env["CXX"]=f"{self.cwd}/build-scripts/clang++-fat.sh"
             subprocess.run(["sh", "./configure", *args], env=env, stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.run(["make", f"-j{os.cpu_count}"], stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.run(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
     def uninstall(self) -> bool:
         subprocess.call(["make", "uninstall"])
         return super().uninstall()
