@@ -40,7 +40,7 @@ jobs:
               continue
             fi
             if [[ "$changed_file" == "index.py" ]];then
-              echo "Skipping $changed_file
+              echo "Skipping $changed_file"
               continue
             fi
             echo PKG ${changed_file%.py}
