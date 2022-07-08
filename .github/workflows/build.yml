@@ -27,13 +27,11 @@ jobs:
         run: git clone --depth 1 --recursive https://github.com/ferment-pkg/ferment /Users/runner/work/Barrells/ferment
       - name: Install Ferment
         run: cd /Users/runner/work/Barrells/ferment && sh install.sh
-      - run: export PATH=$PATH:/Users/runner/work/Barrells/ferment
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: ls ~/work/Barrells/
       - run: ls ~/work/Barrells/Barrells
       - run: ls ~/work/Barrells/ferment
-      - run: echo $PATH
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
@@ -46,7 +44,7 @@ jobs:
               continue
             fi
             echo PKG ${changed_file%.py}
-            fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
+            PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
         run: /Users/runner/work/Barrells/ferment/ferment upgrade
