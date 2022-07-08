@@ -59,4 +59,8 @@ class prebuild(Prebuild):
        self.arm64="ferment://sdl2@sdl2.tar.gz"
     def install(self):
         os.chdir(self.cwd)
+        with open("Makefile", "r+") as f:
+            content=f.read()
+            content=content.replace("/private/tmp/fermenter/sdl2", self.cwd)
+            f.write(content)
         subprocess.call(["make", "install"])
