@@ -5,7 +5,7 @@ import subprocess
 from index import Barrells, Prebuild
 
 
-class sdl(Barrells):
+class sdl2(Barrells):
     def __init__(self):
         self.description = "an image library"
         self.url = "https://libsdl.org/release/SDL2-2.0.22.tar.gz"
