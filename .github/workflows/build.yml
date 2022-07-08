@@ -46,5 +46,19 @@ jobs:
             echo PKG ${changed_file%.py}
             PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
+      - name: Show Logs
+        run: |
+          for f in ${{ steps.files.outputs.all }}; do
+            if [[ $f != *.py ]]; then
+              echo "Skipping $f"
+              continue
+            fi
+            if [[ "$f" == "index.py" ]];then
+              echo "Skipping $f"
+              continue
+            fi
+            echo PKG ${f%.py}
+            tail -n 100 /tmp/${f%.py}.log
+          done
       - name: Finish
         run: /Users/runner/work/Barrells/ferment/ferment upgrade

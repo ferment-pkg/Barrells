@@ -1,6 +1,7 @@
 # Created With Barrells Tool https://ferment.tk/create
 import os
 import subprocess
+import sys
 
 from index import Barrells, Prebuild
 
@@ -24,12 +25,13 @@ class sdl2(Barrells):
         subprocess.call(["make"])
         subprocess.call(["make", "install"])
     def build(self):
-        import os
-        os.chdir(self.cwd)
-        import subprocess
-        args=["--prefix=/usr/local/"]
-        subprocess.call(["sh", "configure", *args], env=[f"CC={self.cwd}/build-scripts/clang-fat.sh"])
-        subprocess.call(["make"])
+        with open("/tmp/sdl2.log", "a") as sys.stdout:
+            import os
+            os.chdir(self.cwd)
+            import subprocess
+            args=["--prefix=/usr/local/"]
+            subprocess.call(["sh", "configure", *args], env=[f"CC={self.cwd}/build-scripts/clang-fat.sh"], stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.call(["make", f"-j{os.cpu_count}"], stdout=sys.stdout, stderr=sys.stdout)
     def uninstall(self) -> bool:
         subprocess.call(["make", "uninstall"])
         return super().uninstall()
