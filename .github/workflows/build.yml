@@ -33,6 +33,7 @@ jobs:
       - run: ls ~/work/Barrells/
       - run: ls ~/work/Barrells/Barrells
       - run: ls ~/work/Barrells/ferment
+      - run: echo $PATH
       - name: Ferment barrells
         run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
