@@ -11,22 +11,16 @@ class automake(Barrells):
     def install(self) -> bool:
         os.chdir(self.cwd)
         os.environ["PERL"]="/usr/bin/perl"
-        subprocess.run(["sh","./configure", f"--prefix={self.cwd}/built"], timeout=1200)
+        subprocess.run(["sh","./configure", f"--prefix=/usr/local"], timeout=1200)
         subprocess.call(["make"])
         subprocess.call(["make"])
         #wait a second for the make to finish
         sleep(1)
         subprocess.call(["make","install"], timeout=120)
-        os.symlink(f"{self.cwd}/built/bin/aclocal", "/usr/local/bin/aclocal")
-        os.symlink(f"{self.cwd}/built/bin/automake", "/usr/local/bin/automake")
-        os.symlink(f"{self.cwd}/built/bin/automake-1.14", "/usr/local/bin/automake-1.16")
-        os.symlink(f"{self.cwd}/built/bin/aclocal-1.14", "/usr/local/bin/aclocal-1.16")
         super().install()
     def uninstall(self) -> bool:
         try:
-            os.remove("/usr/local/bin/automake")
-            os.remove("/usr/local/bin/aclocal")
-            os.remove("/usr/local/bin/automake-1.16")
-            os.remove("/usr/local/bin/aclocal-1.16")
+            os.chdir(self.cwd)
+            subprocess.call(["make","uninstall"])
         finally:
             return super().uninstall()
