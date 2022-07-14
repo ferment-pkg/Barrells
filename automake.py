@@ -28,6 +28,7 @@ class automake(Barrells):
             return super().uninstall()
     def build(self):
         with open(f"{self.cwd}/automake-build.log", "a") as stdout:
+            os.chdir(self.cwd)
             env=os.environ.copy()
             env["CC"]="clang"
             env["CXX"]="clang++"

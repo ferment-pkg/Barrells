@@ -21,6 +21,7 @@ class autoconf(Barrells):
         return super().uninstall()
     def build(self)->bool:
         with open(f"{self.cwd}/autoconf-build.log", "a") as stdout:
+            os.chdir(self.cwd)
             env=os.environ.copy()
             env["CC"]="clang"
             env["CXX"]="clang++"
