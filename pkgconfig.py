@@ -25,15 +25,16 @@ class pkgconfig(Barrells):
         subprocess.call(["make","install", f"-j{os.cpu_count()}"], env=env)
         os.mkdir("/usr/local/lib/pkgconfig")
     def build(self):
-        os.chdir(self.cwd)
-        args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", " --with-internal-glib"]
-        env=os.environ.copy()
-        env["CC"]="clang"
-        env["CXX"]="clang++"
-        env["CFLAGS"]="-arch arm64 -arch x86_64"
-        env["CXXFLAGS"]="-arch arm64 -arch x86_64"
-        subprocess.call(["sh","configure", *args], env=env)
-        subprocess.call(["make", f"-j{os.cpu_count()}"], env=env)
+        with open(f"{self.cwd}/pkgconfig-build.log") as stdout:
+            os.chdir(self.cwd)
+            args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", " --with-internal-glib"]
+            env=os.environ.copy()
+            env["CC"]="clang"
+            env["CXX"]="clang++"
+            env["CFLAGS"]="-arch arm64 -arch x86_64"
+            env["CXXFLAGS"]="-arch arm64 -arch x86_64"
+            subprocess.call(["sh","configure", *args], env=env, stdout=stdout, stderr=stdout)
+            subprocess.call(["make", f"-j{os.cpu_count()}"], env=env, stdout=stdout, stderr=stdout)
 
 
     def uninstall(self) -> bool:
