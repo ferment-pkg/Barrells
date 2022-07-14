@@ -32,7 +32,6 @@ class pkgconfig(Barrells):
         env["CXX"]="clang++"
         env["CFLAGS"]="-arch arm64 -arch x86_64"
         env["CXXFLAGS"]="-arch arm64 -arch x86_64"
-        self.removeTMPWaterMark("pkgconfig")
         subprocess.call(["sh","configure", *args], env=env)
         subprocess.call(["make", f"-j{os.cpu_count()}"], env=env)
 
@@ -49,4 +48,5 @@ class prebuild(Prebuild):
         self.arm64=self.amd64
     def install(self):
         os.chdir(self.cwd)
+        self.removeTMPWaterMark("pkgconfig")
         subprocess.call(["make", "install", f"-j{os.cpu_count()}"])
