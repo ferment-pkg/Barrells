@@ -25,7 +25,7 @@ class pkgconfig(Barrells):
         subprocess.call(["make","install", f"-j{os.cpu_count()}"], env=env)
         os.mkdir("/usr/local/lib/pkgconfig")
     def build(self):
-        with open(f"{self.cwd}/pkgconfig-build.log") as stdout:
+        with open(f"{self.cwd}/pkgconfig-build.log", "a") as stdout:
             os.chdir(self.cwd)
             args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", " --with-internal-glib"]
             env=os.environ.copy()
