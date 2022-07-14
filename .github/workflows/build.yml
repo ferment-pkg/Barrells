@@ -44,7 +44,7 @@ jobs:
               continue
             fi
             echo PKG ${changed_file%.py}
-            PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
+            PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells||true
           done
       - name: Finish
         run: /Users/runner/work/Barrells/ferment/ferment upgrade
