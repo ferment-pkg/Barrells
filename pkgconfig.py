@@ -46,7 +46,7 @@ class pkgconfig(Barrells):
 class prebuild(Prebuild):
     def __init__(self):
         self.amd64="ferment://pkgconfig@pkgconfig.tar.gz"
-        self.arm64=self.amd64
+        self.arm64="ferment://pkgconfig@pkgconfig.tar.gz"
     def install(self):
         os.chdir(self.cwd)
         self.removeTMPWaterMark("pkgconfig")
