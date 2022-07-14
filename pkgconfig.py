@@ -14,7 +14,7 @@ class pkgconfig(Barrells):
         self.prebuild=prebuild()
     def install(self):
         os.chdir(self.cwd)
-        args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", " --with-internal-glib"]
+        args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", "--with-internal-glib"]
         env=os.environ.copy()
         env["CC"]="clang"
         env["CXX"]="clang++"
@@ -27,7 +27,7 @@ class pkgconfig(Barrells):
     def build(self):
         with open(f"{self.cwd}/pkgconfig-build.log", "a") as stdout:
             os.chdir(self.cwd)
-            args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", " --with-internal-glib"]
+            args=["--disable-debug", f"--prefix=/usr/local/","--disable-host-tool", "--with-internal-glib"]
             env=os.environ.copy()
             env["CC"]="clang"
             env["CXX"]="clang++"
