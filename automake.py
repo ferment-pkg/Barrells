@@ -11,6 +11,7 @@ class automake(Barrells):
         self.git=False
         self.description="Automake -- Makefile generator"
         self.dependencies=["autoconf"]
+        self.prebuild=prebuild()
     def install(self) -> bool:
         os.chdir(self.cwd)
         os.environ["PERL"]="/usr/bin/perl"

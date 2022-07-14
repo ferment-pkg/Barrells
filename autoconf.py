@@ -9,6 +9,7 @@ class autoconf(Barrells):
         self.url="http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz"
         self.git=False
         self.description="Autoconf -- system configuration part of autotools"
+        self.prebuild=prebuild()
     def install(self) -> bool:
         os.chdir(self.cwd)
         subprocess.call(["sh","configure", f"--prefix=/usr/local/"])
