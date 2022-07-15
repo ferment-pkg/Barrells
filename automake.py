@@ -30,14 +30,8 @@ class automake(Barrells):
     def build(self):
         with open(f"{self.cwd}/automake-build.log", "a") as stdout:
             os.chdir(self.cwd)
-            env=os.environ.copy()
-            env["CC"]="clang"
-            env["CXX"]="clang++"
-            env["CFLAGS"]="-arch arm64 -arch x86_64"
-            env["CXXFLAGS"]="-arch arm64 -arch x86_64"
-            env["PERL"]="/usr/bin/perl"
-            subprocess.call(["sh","configure", "--prefix=/usr/local/"], env=env, stdout=stdout, stderr=stdout)
-            subprocess.call(["make", f"-j{os.cpu_count()}"], env=env, stdout=stdout, stderr=stdout)
+            subprocess.call(["sh","configure", "--prefix=/usr/local/"], stdout=stdout, stderr=stdout)
+            subprocess.call(["make", f"-j{os.cpu_count()}"],  stdout=stdout, stderr=stdout)
 
 class prebuild(Prebuild):
     def __init__(self):
@@ -45,5 +39,5 @@ class prebuild(Prebuild):
         self.arm64="ferment://automake@automake.tar.gz"
     def install(self):
         os.chdir(self.cwd)
-        self.removeTMPWaterMark("automake")
+        self.removeTMPWaterMark("automake", ["t/wrap/aclocal-1.14", "t/wrap/aclocal.in", "t/wrap/automake-1.14", "t/wrap/automake.in"])
         subprocess.call(["make", "install", f"-j{os.cpu_count()}"])
