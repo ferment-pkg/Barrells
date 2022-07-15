@@ -33,9 +33,17 @@ class pkgconfig(Barrells):
             env["CXX"]="clang++"
             env["CFLAGS"]="-arch arm64 -arch x86_64"
             env["CXXFLAGS"]="-arch arm64 -arch x86_64"
+            env["INSTALL"]="install -p"
             subprocess.call(["sh","configure", *args], env=env, stdout=stdout, stderr=stdout)
             subprocess.call(["make", f"-j{os.cpu_count()}"], env=env, stdout=stdout, stderr=stdout)
 
+    def test(self):
+        e=subprocess.call(["pkg-config", "--version"])
+        if e > 0:
+            print('false')
+            return False
+        print('true')
+        return True
 
     def uninstall(self) -> bool:
         try:
@@ -49,5 +57,5 @@ class prebuild(Prebuild):
         self.arm64="ferment://pkgconfig@pkgconfig.tar.gz"
     def install(self):
         os.chdir(self.cwd)
-        self.removeTMPWaterMark("pkgconfig")
+        self.removeTMPWaterMark("pkgconfig", ["glib/Makefile"])
         subprocess.call(["make", "install", f"-j{os.cpu_count()}"])
