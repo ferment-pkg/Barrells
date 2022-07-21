@@ -40,10 +40,18 @@ class Barrells:
         print("True")
         return True
     # Helper Functions DON'T EDIT
+    def SetPVar(self, var:str, value:str)->None:
+        home=os.getenv("HOME")
+        with open(f"{home}/.zshrc", "a") as f:
+            f.write(f"export {var}={value}\n")
+    def editRC(self, content:str):
+        home=os.getenv("HOME")
+        with open(f"{home}/.zshrc", "a") as f:
+            f.write(content="\n")
     def EditPath(self, path:str):
         home=os.getenv("HOME")
         with open(f"{home}/.zshrc", "a") as f:
-            f.write(f"PATH=$PATH:{path}")
+            f.write(f"PATH=$PATH:{path}\n")
     def SetPkgConfigPath(self)->None:
         os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
     def runcmdincwd(self, cmd):
