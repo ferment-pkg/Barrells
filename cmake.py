@@ -1,5 +1,8 @@
 import os
+
 from index import Barrells
+
+
 class cmake(Barrells):
     def __init__(self):
         self.url="https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1-macos10.10-universal.tar.gz"

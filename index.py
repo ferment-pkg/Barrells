@@ -19,6 +19,7 @@ class Barrells:
         self.binary:str
         self.lib:bool
         self.setup:bool=False
+        self.caveats:str
         #Provided by the cmd
         self.cwd:str
     def install(self)->bool:
