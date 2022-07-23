@@ -10,6 +10,7 @@ class pyenv(Barrells):
         self.description = "Simple Python Version Management: pyenv"
         self.url = "https://github.com/pyenv/pyenv.git"
         self.git = True
+        self.version="2.3.2"
         self.lib = False
         self.dependencies = ["automake"]
 

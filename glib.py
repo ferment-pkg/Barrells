@@ -12,6 +12,7 @@ class glib(Barrells):
         self.url = "https://gitlab.gnome.org/GNOME/glib.git"
         self.git = True
         self.lib = True
+        self.version="2.35"
         self.dependencies = ["ninja"]
 
     def install(self):

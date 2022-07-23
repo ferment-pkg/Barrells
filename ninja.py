@@ -1,11 +1,15 @@
 import os
 import subprocess
+
 from index import Barrells
+
+
 class ninja(Barrells):
     def __init__(self):
         self.url="https://github.com/ninja-build/ninja/archive/v1.10.2.tar.gz"
         self.description="Small build system for use with gyp or CMake"
         self.git=False
+        self.version="1.10.2"
         self.homepage="https://ninja-build.org/"
     def install(self):
         os.chdir(self.cwd)

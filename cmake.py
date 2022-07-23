@@ -8,6 +8,7 @@ class cmake(Barrells):
         self.url="https://github.com/Kitware/CMake/releases/download/v3.23.1/cmake-3.23.1-macos10.10-universal.tar.gz"
         self.git=False
         self.description="Cross-platform build system"
+        self.version="3.23.1"
     def install(self) -> bool:
         os.symlink(f"{self.cwd}/CMake.app/Contents/bin/cmake","/usr/local/bin/cmake")
         os.symlink(f"{self.cwd}/CMake.app/Contents/bin/ccmake","/usr/local/bin/ccmake")

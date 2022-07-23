@@ -10,6 +10,7 @@ class task(Barrells):
         self.url="https://github.com/GothenburgBitFactory/taskwarrior/releases/download/v2.6.2/task-2.6.2.tar.gz"
         self.git=False
         self.license="MIT"
+        self.version="2.6.2"
         self.description="Feature-rich console based todo list manager"
         self.homepage="https://taskwarrior.org/"
         self.dependencies=["cmake"]

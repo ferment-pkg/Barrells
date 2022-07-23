@@ -1,10 +1,14 @@
-import subprocess
-from index import Barrells
 import os
+import subprocess
+
+from index import Barrells
+
+
 class oniguruma(Barrells):
     def __init__(self):
         self.url="https://github.com/kkos/oniguruma/releases/download/v6.9.8/onig-6.9.8.tar.gz"
         self.git=False
+        self.version-"6.9.8"
         self.description="Oniguruma is a modern and flexible regular expressions library."
         self.dependencies=["autoconf", "automake", "libtool"]
         self.lib=True
@@ -21,7 +25,7 @@ class oniguruma(Barrells):
         for f in dirs:
             os.symlink(f"{self.cwd}/built/lib/{f}", f"/usr/local/lib/{f}")
         os.symlink(f"{self.cwd}/built/lib/pkgconfig/oniguruma.pc", "/usr/local/lib/pkgconfig/oniguruma.pc")
-        
+
         return super().install()
     def uninstall(self) -> bool:
         try:

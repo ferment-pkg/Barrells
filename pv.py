@@ -8,6 +8,7 @@ class pv(Barrells):
         self.url = "https://github.com/icetee/pv/archive/refs/tags/v1.6.6.tar.gz"
         self.git = False
         self.lib = False
+        self.version="1.6.6"
         self.home = "https://www.ivarch.com/programs/pv.shtml"
         self.dependencies = ["automake", "pkg-config"]
 
@@ -22,12 +23,12 @@ class pv(Barrells):
         subprocess.call(["make"])
         subprocess.call(["make", "install"])
     def build(self):
- 	    import subprocess
+        import subprocess
         args = ["--prefix=/usr/local/", "--disable-nls"]
         import os
         os.chdir(self.cwd)
         subprocess.call(["sh", "./configure", *args])
-        subprocess.call(["make"])   
+        subprocess.call(["make"])
     def uninstall(self):
         import os
 

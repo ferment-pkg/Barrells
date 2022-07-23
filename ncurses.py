@@ -13,6 +13,7 @@ class ncurses(Barrells):
         self.git = False
         self.lib = True
         self.dependencies = ["pkg-config"]
+        self.version="6.1"
 
     def install(self):
         with open("/tmp/ncurses.log", "a") as sys.stdout:

@@ -11,8 +11,10 @@ class rust(Barrells):
         self.git = False
         self.lib = False
         self.setup = True
+        self.version="1.62"
         self.home = "https://www.rust-lang.org"
         self.dependencies = []
+
 
     def install(self) -> bool:
         self.EditPath("$HOME/.cargo/bin")
