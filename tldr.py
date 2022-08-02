@@ -9,6 +9,7 @@ class tldr(Barrells):
     def __init__(self):
         self.url="https://github.com/tldr-pages/tldr-c-client/archive/v1.4.3.tar.gz"
         self.git=False
+        self.version="1.4.3"
         self.description= "Simplified and community-driven man pages"
         self.dependencies=["libzip", "pkg-config"]
         self.lib=True

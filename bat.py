@@ -10,6 +10,7 @@ class bat(Barrells):
         self.url = "https://github.com/sharkdp/bat/archive/v0.21.0.tar.gz"
         self.git = False
         self.lib = False
+        self.version="0.21"
         self.home = "https://github.com/sharkdp/bat"
         self.dependencies = ["rust"]
 

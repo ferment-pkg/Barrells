@@ -16,6 +16,7 @@ class sdl2(Barrells):
         self.dependencies = ["autoconf", "automake"]
         self.prebuild=prebuild()
         self.args=["--enable-hidapi"]
+        self.version="2.0.22"
 
     def install(self):
         import os

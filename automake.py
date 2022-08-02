@@ -9,6 +9,7 @@ class automake(Barrells):
     def __init__(self):
         self.url="https://ftp.gnu.org/gnu/automake/automake-1.14.tar.gz"
         self.git=False
+        self.version="1.14"
         self.description="Automake -- Makefile generator"
         self.dependencies=["autoconf"]
     def install(self) -> bool:

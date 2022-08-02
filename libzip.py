@@ -1,5 +1,6 @@
 import os
 import subprocess
+
 from index import Barrells
 
 
@@ -12,6 +13,7 @@ class libzip(Barrells):
         )
         self.dependencies = ["cmake"]
         self.lib = True
+        self.version = "1.8.0"
 
     def install(self):
         args = [

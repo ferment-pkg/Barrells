@@ -10,6 +10,7 @@ class pkgconfig(Barrells):
         self.url="https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
         self.git=False
         self.description="Manage compile and link flags for libraries"
+        self.version="0.29.2"
         self.dependencies=["autoconf", "automake", "libtool"]
         self.prebuild=prebuild()
     def install(self):
