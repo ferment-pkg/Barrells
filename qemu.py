@@ -48,7 +48,12 @@ class qemu(Barrells):
             os.chdir(self.cwd)
             subprocess.call(["git", "checkout", f"stable-{self.version}"])
             os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
-            args=["--disable-bsd-user", "--disable-guest-agent", "--enable-libssh", "--enable-slirp=system", "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa']
+            env=os.environ.copy()
+            env["CC"]="clang"
+            env["CXX"]="clang++"
+            env["CFLAGS"]="-arch arm64 -arch x86_64"
+            env["CXXFLAGS"]="-arch arm64 -arch x86_64"
+            args=["--disable-bsd-user", "--disable-guest-agent", "--enable-libssh", "--enable-slirp=system", "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa',f"--prefix={self.cwd}/built"]
             os.mkdir("build")
             subprocess.call(["git", "submodule", "init"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "update", "--recursive", f"--jobs={os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
@@ -56,12 +61,25 @@ class qemu(Barrells):
             os.chdir("build")
             subprocess.call(["sh", "../configure", *args], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.call(["make", "install"])
+            #get all directories
+            dirs=os.listdir(f"{self.cwd}")
+            os.chdir(self.cwd)
+            #remove each directory
+            for d in dirs:
+                if d !="built":
+                    os.remove(f"{self.cwd}/{d}", recursive=True)
+
+
 
 class prebuilt(Prebuild):
     def __init__(self):
-        self.amd64="https://github.com/ferment-pkg/qemu-prebuilt/archive/refs/tags/v1.1.tar.gz"
+        self.amd64="ferment://qemu@qemu.tar.gz"
+        self.arm64="ferment://qemu@qemu.tar.gz"
     def install(self):
         with open("/tmp/qemu.log") as sys.stdout:
             os.chdir(self.cwd)
-            subprocess.run(["make", "install"], stdout=sys.stdout, stderr=sys.stderr)
+            os.link(f'{self.cwd}/built/*','/usr/local/')
+
+
 
