@@ -48,7 +48,7 @@ class Barrells:
     def editRC(self, content:str):
         home=os.getenv("HOME")
         with open(f"{home}/.zshrc", "a") as f:
-            f.write(content="\n")
+            f.write(f"{content}\n")
     def EditPath(self, path:str):
         home=os.getenv("HOME")
         with open(f"{home}/.zshrc", "a") as f:

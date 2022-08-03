@@ -20,6 +20,6 @@ class pyenv(Barrells):
         subprocess.call(["make", "-C", "src"])
         self.SetPVar("PYENV_ROOT", self.cwd)
         self.EditPath("$PYENV_ROOT/bin")
-        self.editRC("eval $(pyenv init -)")
+        self.editRC("eval $(pyenv init -)"
 
 
