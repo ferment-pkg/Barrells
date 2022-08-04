@@ -55,4 +55,3 @@ class prebuild(Prebuild):
         self.arm64="ferment://bitgit@bitgit.tar.gz"
     def install(self):
         os.chdir(self.cwd)
-        os.symlink(f"{self.cwd}/bit", "/usr/local/bin/bit")
