@@ -44,5 +44,6 @@ class pyenv(Barrells):
             f.write(content)
         finally:
             return True
+        self.editRC("eval $(pyenv init -")
 
 
