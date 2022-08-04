@@ -6,6 +6,7 @@ from typing import List, Optional
 class Barrells:
     def __init__(self):
         self.url:str
+        """ currently supported protocols, http, https, sh(built into the program), interactive(built into the program and only works with sh)"""
         self.description:str
         self.homepage:str
         self.prebuild:Optional[Prebuild]
