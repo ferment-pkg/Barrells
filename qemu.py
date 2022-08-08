@@ -46,7 +46,7 @@ class qemu(Barrells):
     def build(self):
        with open(f'{self.cwd}/qemu-build.log', "a") as sys.stdout:
             os.chdir(self.cwd)
-            subprocess.call(["git", "checkout", f"stable-{self.version}"])
+            subprocess.call(["git", "checkout", f"stable-{self.version}"], stdout=sys.stdout, stderr=sys.stdout)
             os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
             env=os.environ.copy()
             env["CC"]="clang"
@@ -54,17 +54,14 @@ class qemu(Barrells):
             env["CFLAGS"]="-arch arm64 -arch x86_64"
             env["CXXFLAGS"]="-arch arm64 -arch x86_64"
             args=["--disable-bsd-user", "--disable-guest-agent", "--enable-libssh", "--enable-slirp=system", "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa',f"--prefix={self.cwd}/build"]
-            os.mkdir("build")
             subprocess.call(["git", "submodule", "init"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "update", "--recursive", f"--jobs={os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "status", "--recursive"],stdout=sys.stdout, stderr=sys.stdout)
-            os.chdir("build")
             subprocess.call(["sh", "../configure", *args], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["make", "install"])
+            subprocess.call(["make", "install"],stdout=sys.stdout, stderr=sys.stdout)
             #get all directories
             dirs=os.listdir(f"{self.cwd}")
-            os.chdir(self.cwd)
             #remove each directory
             for d in dirs:
                 if d !="build":
