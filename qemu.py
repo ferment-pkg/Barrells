@@ -57,9 +57,9 @@ class qemu(Barrells):
             subprocess.call(["git", "submodule", "init"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "update", "--recursive", f"--jobs={os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "status", "--recursive"],stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["sh", "../configure", *args], stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["make", "install"],stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.call(["sh", "../configure", *args], stdout=sys.stdout, stderr=sys.stdout, env=env)
+            subprocess.call(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout,env=env)
+            subprocess.call(["make", "install"],stdout=sys.stdout, stderr=sys.stdout,env=env)
             #get all directories
             dirs=os.listdir(f"{self.cwd}")
             #remove each directory
