@@ -44,7 +44,7 @@ class qemu(Barrells):
             return False
         return super().test()
     def build(self):
-       with open('/tmp/qemu.log', "a") as sys.stdout:
+       with open(f'{self.cwd}/qemu-build.log', "a") as sys.stdout:
             os.chdir(self.cwd)
             subprocess.call(["git", "checkout", f"stable-{self.version}"])
             os.environ["PKG_CONFIG_PATH"]="/usr/local/lib/pkgconfig"
@@ -53,7 +53,7 @@ class qemu(Barrells):
             env["CXX"]="clang++"
             env["CFLAGS"]="-arch arm64 -arch x86_64"
             env["CXXFLAGS"]="-arch arm64 -arch x86_64"
-            args=["--disable-bsd-user", "--disable-guest-agent", "--enable-libssh", "--enable-slirp=system", "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa',f"--prefix={self.cwd}/built"]
+            args=["--disable-bsd-user", "--disable-guest-agent", "--enable-libssh", "--enable-slirp=system", "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa',f"--prefix={self.cwd}/build"]
             os.mkdir("build")
             subprocess.call(["git", "submodule", "init"], stdout=sys.stdout, stderr=sys.stdout)
             subprocess.call(["git", "submodule", "update", "--recursive", f"--jobs={os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
@@ -79,7 +79,7 @@ class prebuilt(Prebuild):
     def install(self):
         with open("/tmp/qemu.log") as sys.stdout:
             os.chdir(self.cwd)
-            os.link(f'{self.cwd}/built/*','/usr/local/')
+            os.link(f'{self.cwd}/build/*','/usr/local/')
 
 
 
