@@ -67,8 +67,8 @@ class qemu(Barrells):
             os.chdir(self.cwd)
             #remove each directory
             for d in dirs:
-                if d !="built":
-                    os.remove(f"{self.cwd}/{d}", recursive=True)
+                if d !="build":
+                    os.remove(f"{self.cwd}/{d}")
 
 
 
