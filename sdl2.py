@@ -81,4 +81,4 @@ class prebuild(Prebuild):
         originalcontent=originalcontent.replace("/private/tmp/fermenter/sdl2", self.cwd+"/")
         originalcontent=originalcontent.replace("/tmp/fermenter/sdl2", self.cwd+"/")
         open("libtool", "w").write(originalcontent)
-        subprocess.run(["make", "install", f"-j{os.cpu_count()|2}"], stdout=sys.stdout, stderr=sys.stdout)
+        subprocess.run(["make", "install", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
