@@ -33,6 +33,7 @@ class sdl2(Barrells):
     def build(self):
         with open(f"{self.cwd}/sdl2-build.log", "a") as sys.stdout:
             import os
+            #
             os.chdir(self.cwd)
             import subprocess
             args = ["--prefix=/usr/local/", *self.args]
