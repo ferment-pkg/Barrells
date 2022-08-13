@@ -12,7 +12,7 @@ class automake(Barrells):
         self.version="1.14"
         self.description="Automake -- Makefile generator"
         self.dependencies=["autoconf"]
-    def install(self) -> bool:
+    def install(self):
         with open(f"{self.cwd}/automake-build.log", "a") as f:
             os.chdir(self.cwd)
             env=os.environ.copy()
@@ -23,8 +23,13 @@ class automake(Barrells):
             subprocess.call(["make"], stdout=f, stderr=f)
             subprocess.call(["make","install"],stdout=f, stderr=f)
             super().install()
-    def test(self):
-        subprocess.call(["automake","--version"])
+    def test(self)->bool:
+        st=subprocess.check_call(["which","automake"])
+        if st > 0:
+            print("False")
+            return False
+        print("True")
+        return True
     def uninstall(self) -> bool:
         try:
             os.chdir(self.cwd)

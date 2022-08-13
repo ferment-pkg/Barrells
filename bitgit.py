@@ -21,7 +21,7 @@ class bitgit(Barrells):
         with open("/tmp/bitgit.log", "a") as sys.stdout:
             subprocess.run(["go", "build"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
             return True
-    def build(self) -> bool:
+    def build(self):
            with open("/tmp/bitgit.log", "a") as sys.stdout:
             subprocess.run(["go", "build", "-o", "x86-bitgit"], cwd=self.cwd, stdout=sys.stdout, stderr=sys.stdout)
             print("Building for arm64 now")
