@@ -11,7 +11,7 @@ class ninja(Barrells):
         self.git = False
         self.version = "1.10.2"
         self.homepage = "https://ninja-build.org/"
-        self.prebuild = Prebuild()
+        self.prebuild = prebuild()
 
     def install(self):
         os.chdir(self.cwd)
