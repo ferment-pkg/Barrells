@@ -15,6 +15,7 @@ class ninja(Barrells):
 
     def install(self):
         os.chdir(self.cwd)
+        #
         subprocess.call(["python3", "configure.py", "--bootstrap",
                         "--with-python=python3"], cwd=self.cwd)
         subprocess.call(["pip", "install", "meson"], cwd=self.cwd)
