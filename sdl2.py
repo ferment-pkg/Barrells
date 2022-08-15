@@ -37,13 +37,22 @@ class sdl2(Barrells):
             #
             os.chdir(self.cwd)
             import subprocess
-            args=["--prefix=build", *self.args]
-            env=os.environ.copy()
-            env["CC"]=f"{self.cwd}/build-scripts/clang-fat.sh"
-            env["CXX"]=f"{self.cwd}/build-scripts/clang++-fat.sh"
-            subprocess.run(["sh", "./configure", *args], env=env, stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.run(["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
-            subprocess.call(["make", "install"], stdout=sys.stdout, stderr=sys.stdout)
+            args = [f"--prefix={self.cwd}/built", *self.args]
+            env = os.environ.copy()
+            env["CC"] = f"{self.cwd}/build-scripts/clang-fat.sh"
+            env["CXX"] = f"{self.cwd}/build-scripts/clang++-fat.sh"
+            subprocess.run(["sh", "./configure", *args], env=env,
+                           stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.run(
+                ["make", f"-j{os.cpu_count()}"], stdout=sys.stdout, stderr=sys.stdout)
+            subprocess.call(["make", "install"],
+                            stdout=sys.stdout, stderr=sys.stdout)
+            files = os.listdir(self.cwd)
+            # remove built from dirs
+            files.remove("built")
+            for file in files:
+                os.remove(file)
+            os.rename("built", "build")
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
@@ -67,4 +76,3 @@ class prebuild(Prebuild):
     def install(self):
         os.chdir(self.cwd)
         os.symlink("build/*", "/usr/local/")
-
