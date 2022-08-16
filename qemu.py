@@ -16,9 +16,8 @@ class qemu(Barrells):
         self.prebuild = prebuilt()
 
     def install(self):
-        with open('/tmp/qemu.log', "a") as sys.stdout:
+        with open('/tmp/qemu.log', "a+", encoding="utf-8") as sys.stdout:
             os.chdir(self.cwd)
-            subprocess.call(["git", "checkout", f"stable-{self.version}"])
             os.environ["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
             args = ["--disable-bsd-user", "--disable-guest-agent", "--enable-curses", "--enable-libssh", "--enable-slirp=system",
                     "--enable-vde",  "--extra-cflags=-DNCURSES_WIDECHAR=1", "--disable-sdl", '--disable-gtk', '--enable-cocoa']
