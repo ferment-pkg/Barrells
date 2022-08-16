@@ -32,6 +32,7 @@ jobs:
         run: cd /Users/runner/work/Barrells/ferment && sh install.sh
       - id: files
         uses: jitterbit/get-changed-files@v1
+        continueOnError: true
       - run: ls ~/work/Barrells/
       - run: ls ~/work/Barrells/Barrells
       - run: ls ~/work/Barrells/ferment
@@ -47,7 +48,7 @@ jobs:
               continue
             fi
             echo PKG ${changed_file%.py}
-            PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells||true
+            PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter build ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Finish
         run: /Users/runner/work/Barrells/ferment/ferment upgrade
