@@ -32,7 +32,6 @@ jobs:
         run: cd /Users/runner/work/Barrells/ferment && sh install.sh
       - id: files
         uses: jitterbit/get-changed-files@v1
-        continueOnError: true
       - run: ls ~/work/Barrells/
       - run: ls ~/work/Barrells/Barrells
       - run: ls ~/work/Barrells/ferment
