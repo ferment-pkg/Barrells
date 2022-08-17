@@ -49,6 +49,7 @@ class qemu(Barrells):
     def build(self):
         with open(f'{self.cwd}/qemu-build.log', "a") as sys.stdout:
             os.chdir(self.cwd)
+            #
             os.environ["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
             env = os.environ.copy()
             env["CC"] = "clang"
