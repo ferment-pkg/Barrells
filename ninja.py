@@ -12,6 +12,7 @@ class ninja(Barrells):
         self.version = "1.10.2"
         self.homepage = "https://ninja-build.org/"
         self.prebuild = prebuild()
+        self.caveats = "You may need to allow ninja to run in System Preferences > Security & Privacy"
 
     def install(self):
         os.chdir(self.cwd)
@@ -34,5 +35,6 @@ class prebuild(Prebuild):
 
     def install(self):
         os.chdir(self.cwd)
+        subprocess.call(["pip", "install", "meson"], cwd=self.cwd)
         os.symlink(f"{self.cwd}/ninja", "/usr/local/bin/ninja")
         return super().install()
