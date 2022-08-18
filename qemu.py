@@ -81,7 +81,7 @@ class prebuilt(Prebuild):
         self.arm64 = "ferment://qemu@qemu.tar.gz"
 
     def install(self):
-        with open("/tmp/qemu.log") as sys.stdout:
+        with open("/tmp/qemu.log", "a") as sys.stdout:
             os.chdir(self.cwd)
             os.symlink(f'{self.cwd}/build/*', '/usr/local/',
                        target_is_directory=True)
