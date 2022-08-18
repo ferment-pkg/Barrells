@@ -2,7 +2,7 @@ import os
 import subprocess
 import sys
 
-from index import Barrells, Prebuild
+from index import Barrells, Prebuild, patch
 
 
 class qemu(Barrells):
@@ -49,7 +49,10 @@ class qemu(Barrells):
     def build(self):
         with open(f'{self.cwd}/qemu-build.log', "a") as sys.stdout:
             os.chdir(self.cwd)
-            #
+            # Apply patch
+            # Fixes RDTSCP not being exposed to hosts
+            # Derived from https://github.com/Homebrew/homebrew-core/blob/HEAD/Formula/qemu.rb
+            patch("https://gitlab.com/qemu-project/qemu/-/commit/d8cf2c29cc1077cd8f8ab0580b285bff92f09d1c.diff", self)
             os.environ["PKG_CONFIG_PATH"] = "/usr/local/lib/pkgconfig"
             env = os.environ.copy()
             env["CC"] = "clang"
@@ -78,7 +81,7 @@ class prebuilt(Prebuild):
         self.arm64 = "ferment://qemu@qemu.tar.gz"
 
     def install(self):
-        with open("/tmp/qemu.log") as sys.stdout:
+        with open("/tmp/qemu.log", "a") as sys.stdout:
             os.chdir(self.cwd)
             os.symlink(f'{self.cwd}/build/*', '/usr/local/',
                        target_is_directory=True)
