@@ -24,7 +24,13 @@ class autoconf(Barrells):
         os.chdir(self.cwd)
         subprocess.call(["make", "uninstall"])
         return super().uninstall()
-
+    def test(self)->bool:
+        e = subprocess.call(["autoconf", "--version"])
+        if e > 0:
+            print('false')
+            return False
+        print('true')
+        return True
     def build(self) -> bool:
         with open(f"{self.cwd}/autoconf-build.log", "a") as stdout:
             os.chdir(self.cwd)
