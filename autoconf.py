@@ -24,13 +24,15 @@ class autoconf(Barrells):
         os.chdir(self.cwd)
         subprocess.call(["make", "uninstall"])
         return super().uninstall()
-    def test(self)->bool:
+
+    def test(self) -> bool:
         e = subprocess.call(["autoconf", "--version"])
         if e > 0:
             print('false')
             return False
         print('true')
         return True
+
     def build(self) -> bool:
         with open(f"{self.cwd}/autoconf-build.log", "a") as stdout:
             os.chdir(self.cwd)
@@ -43,6 +45,7 @@ class autoconf(Barrells):
                             env=env, stdout=stdout, stderr=stdout)
             subprocess.call(
                 ["make", f"-j{os.cpu_count()}"], env=env, stdout=stdout, stderr=stdout)
+            #
             patch("https://gist.githubusercontent.com/NotTimIsReal/b3bf20c6e5b831a4283dc408b265e46f/raw/5901de79ca4bf8238bdf6da40b42f7e1f57f2d03/autom4te.patch", self)
 
 
