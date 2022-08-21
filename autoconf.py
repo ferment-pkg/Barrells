@@ -28,9 +28,9 @@ class autoconf(Barrells):
     def test(self) -> bool:
         e = subprocess.call(["autoconf", "--version"])
         if e > 0:
-            print('false')
+            print('False')
             return False
-        print('true')
+        print('True')
         return True
 
     def build(self) -> bool:
