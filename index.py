@@ -146,10 +146,10 @@ class Prebuild():
             open(f, "w").write(ogcontent)
 
 
-def patch(url, self: Barrells):
+def patch(url, dst):
     # visit the url and download the patch
     request.urlretrieve(
-        url, f"{self.cwd}/{url.split('/')[-1]}")
+        url, f"/tmp/{url.split('/')[-1]}")
     # apply the patch
-    subprocess.run(["git", "apply", "--ignore-whitespace",
-                   f"{self.cwd}/{url.split('/')[-1]}"])
+    subprocess.run(
+        ["patch", "-p1", dst, f"/tmp/{url.split('/')[-1]}"])
