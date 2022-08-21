@@ -16,9 +16,9 @@ class ninja(Barrells):
 
     def install(self):
         os.chdir(self.cwd)
-        subprocess.call(["python3", "configure.py", "--bootstrap",
-                        "--with-python=python3"], cwd=self.cwd)
-        subprocess.call(["pip", "install", "meson"], cwd=self.cwd)
+        subprocess.call(["python3", "configure.py",
+                        "--bootstrap"], cwd=self.cwd)
+        subprocess.call(["pip3", "install", "meson"], cwd=self.cwd)
         os.symlink(f"{self.cwd}/ninja", "/usr/local/bin/ninja")
 
     def uninstall(self) -> bool:
@@ -35,6 +35,6 @@ class prebuild(Prebuild):
 
     def install(self):
         os.chdir(self.cwd)
-        subprocess.call(["pip", "install", "meson"], cwd=self.cwd)
+        subprocess.call(["pip3", "install", "meson"], cwd=self.cwd)
         os.symlink(f"{self.cwd}/ninja", "/usr/local/bin/ninja")
         return super().install()
