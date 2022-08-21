@@ -47,5 +47,5 @@ class prebuild(Prebuild):
 
     def install(self):
         os.chdir(self.cwd)
-        self.removeTMPWaterMark("autoconf", "Makefile")
+        self.removeTMPWaterMark("autoconf", ["Makefile"])
         subprocess.call(["make", "install", f"-j{os.cpu_count()}"])
