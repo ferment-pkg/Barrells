@@ -47,6 +47,8 @@ class bat(Barrells):
             # remove bat from contents
             contents.remove("bat")
             # move contents to bin
+            print=stdout.write
+            print(contents)
             for item in contents:
                 os.remove(item)
             # make empty file called PREBUILD
