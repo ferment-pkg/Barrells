@@ -13,7 +13,7 @@ class bat(Barrells):
         self.lib = False
         self.version = "0.21"
         self.home = "https://github.com/sharkdp/bat"
-        self.dependencies = ["rust"]
+        self.dependencies = ["rustc:rust"]
         self.prebuild = prebuild()
 
     def install(self):
