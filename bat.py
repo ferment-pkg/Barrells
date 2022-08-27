@@ -30,22 +30,23 @@ class bat(Barrells):
 
     def build(self):
         os.chdir(self.cwd)
-        subprocess.call(
-            ["cargo", "build", "--target=aarch64-apple-darwin", "bat"])
-        subprocess.call(
-            ["cargo", "build", "--target=x86_64-apple-darwin", "bat"])
-        # link with lipo
-        subprocess.call(["lipo", "-create", "-output", "bat",
-                        "target/aarch64-apple-darwin/release/bat", "target/x86_64-apple-darwin/release/bat"])
+        with open("bat-build.log", "a") as stdout:
+            subprocess.call(
+                ["cargo", "build", "--target=aarch64-apple-darwin", "bat"], stdout=stdout, stderr=stdout)
+            subprocess.call(
+                ["cargo", "build", "--target=x86_64-apple-darwin", "bat"], stdout=stdout, stderr=stdout)
+            # link with lipo
+            subprocess.call(["lipo", "-create", "-output", "bat",
+                            "target/aarch64-apple-darwin/release/bat", "target/x86_64-apple-darwin/release/bat"], stdout=stdout, stderr=stdout)
 
-        contents = os.listdir()
-        # remove bat from contents
-        contents.remove("bat")
-        # move contents to bin
-        for item in contents:
-            os.remove(item)
-        # make empty file called PREBUILD
-        open("PREBUILD", "w").close()
+            contents = os.listdir()
+            # remove bat from contents
+            contents.remove("bat")
+            # move contents to bin
+            for item in contents:
+                os.remove(item)
+            # make empty file called PREBUILD
+            open("PREBUILD", "w").close()
         return super().build()
 
     def test(self):
