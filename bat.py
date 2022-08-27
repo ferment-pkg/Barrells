@@ -36,9 +36,9 @@ class bat(Barrells):
             subprocess.call(
                 ["rustup", "target", "add", "x86_64-apple-darwin"], stdout=stdout, stderr=stdout)
             subprocess.call(
-                ["cargo", "build", "--target=aarch64-apple-darwin", "--release"], stdout=stdout, stderr=stdout)
+                ["cargo", "build", "--target=aarch64-apple-darwin", "--release", f"-j{os.cpu_count()*2}", "--locked"], stdout=stdout, stderr=stdout)
             subprocess.call(
-                ["cargo", "build", "--target=x86_64-apple-darwin", "--release"], stdout=stdout, stderr=stdout)
+                ["cargo", "build", "--target=x86_64-apple-darwin", "--release", f"-j{os.cpu_count()*2}", "--locked"], stdout=stdout, stderr=stdout)
             # link with lipo
             subprocess.call(["lipo", "-create", "-output", "bat",
                             "target/aarch64-apple-darwin/release/bat", "target/x86_64-apple-darwin/release/bat"], stdout=stdout, stderr=stdout)
