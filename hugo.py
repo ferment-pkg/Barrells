@@ -15,6 +15,7 @@ class hugo(Barrells):
         self.dependencies = ["go"]
         self.binary = "hugo"
         self.version = "0.101.0"
+        self.prebuild = prebuild()
 
     def install(self):
         os.chdir(self.cwd)
