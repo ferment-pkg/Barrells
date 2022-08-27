@@ -32,9 +32,9 @@ class bat(Barrells):
         os.chdir(self.cwd)
         with open("bat-build.log", "a") as stdout:
             subprocess.call(
-                ["cargo", "build", "--target=aarch64-apple-darwin", "bat"], stdout=stdout, stderr=stdout)
+                ["cargo", "build", "--target=aarch64-apple-darwin"], stdout=stdout, stderr=stdout)
             subprocess.call(
-                ["cargo", "build", "--target=x86_64-apple-darwin", "bat"], stdout=stdout, stderr=stdout)
+                ["cargo", "build", "--target=x86_64-apple-darwin"], stdout=stdout, stderr=stdout)
             # link with lipo
             subprocess.call(["lipo", "-create", "-output", "bat",
                             "target/aarch64-apple-darwin/release/bat", "target/x86_64-apple-darwin/release/bat"], stdout=stdout, stderr=stdout)
