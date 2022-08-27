@@ -54,7 +54,7 @@ class bat(Barrells):
         return super().build()
 
     def test(self):
-        out = subprocess.call("bat", "-V")
+        out = subprocess.call("which", "bat")
         if out > 0:
             print("False")
             return False
