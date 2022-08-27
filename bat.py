@@ -32,6 +32,10 @@ class bat(Barrells):
         os.chdir(self.cwd)
         with open("bat-build.log", "a") as stdout:
             subprocess.call(
+                ["rustup", "target", "add", "aarch64-apple-darwin"], stdout=stdout, stderr=stdout)
+            subprocess.call(
+                ["rustup", "target", "add", "x86_64-apple-darwin"], stdout=stdout, stderr=stdout)
+            subprocess.call(
                 ["cargo", "build", "--target=aarch64-apple-darwin"], stdout=stdout, stderr=stdout)
             subprocess.call(
                 ["cargo", "build", "--target=x86_64-apple-darwin"], stdout=stdout, stderr=stdout)
