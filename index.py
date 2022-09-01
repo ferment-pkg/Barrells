@@ -18,6 +18,7 @@ class Barrells:
         self.sha256: str
         self.supported_OS: list[str]
         self.dependencies: list[str]
+        self.dualarch = False
         self.binary: str
         self.lib: bool
         self.setup: bool = False
