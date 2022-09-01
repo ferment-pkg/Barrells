@@ -42,6 +42,10 @@ class libzip(Barrells):
                 "-DBUILD_EXAMPLES=OFF",
                 f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
             ]
+            stdout.write(
+                "Running")
+            stdout.write(
+                " ".join(["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)]))
             subprocess.call(
                 ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd, stdout=stdout, stderr=stdout
             )
