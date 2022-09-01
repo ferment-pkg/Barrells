@@ -22,14 +22,14 @@ class libzip(Barrells):
             "-DENABLE_OPENSSL=OFF",
             "-DBUILD_REGRESS=OFF",
             "-DBUILD_EXAMPLES=OFF",
-            "-DCMAKE_INSTALL_PREFIX=built",
+            f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
         ]
         subprocess.call(
             ["cmake", "-DCMAKE_BUILD_TYPE=release", " ".join(args), "."], cwd=self.cwd
         )
         subprocess.call(
             ["make", "install", f"-j{os.cpu_count()}"], cwd=self.cwd)
-        subprocess.call(["cp", "-rs", f"{self.cwd}/built/*", "/usr/local/"])
+        subprocess.call(["cp", "-rS", f"{self.cwd}/built/*", "/usr/local/"])
 
     def build(self):
         os.chdir(self.cwd)
@@ -40,15 +40,15 @@ class libzip(Barrells):
                 "-DENABLE_OPENSSL=OFF",
                 "-DBUILD_REGRESS=OFF",
                 "-DBUILD_EXAMPLES=OFF",
-                "-DCMAKE_INSTALL_PREFIX=built",
+                f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
             ]
             subprocess.call(
                 ["cmake", "-DCMAKE_BUILD_TYPE=release", " ".join(args), "."], cwd=self.cwd, stdout=stdout, stderr=stdout
             )
             subprocess.call(["make", f"-j{os.cpu_count()}"],
-                            cwd=self.cwd, env=universalbinaryenv(), stdout=stdout, stderr=stdout)
-            subprocess.call(
-                ["make", "install", f"-j{os.cpu_count()}"], cwd=self.cwd, stdout=stdout, stderr=stdout)
+                            cwd=self.cwd, stdout=stdout, stderr=stdout)
+            subprocess.call(["make", "install"],
+                            cwd=self.cwd, stdout=stdout, stderr=stdout)
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
@@ -76,4 +76,4 @@ class prebuild(Prebuild):
         self.arm64 = "ferment://libzip-arm64@libzip.tar.gz"
 
     def install(self):
-        subprocess.call(["cp", "-rs", f"{self.cwd}/built/*", "/usr/local/"])
+        subprocess.call(["cp", "-rS", f"{self.cwd}/built/*", "/usr/local/"])
