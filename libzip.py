@@ -13,6 +13,7 @@ class libzip(Barrells):
         self.lib = True
         self.version = "1.8.0"
         self.dualarch = True
+        self.prebuild = prebuild()
 
     def install(self):
         args = [
@@ -71,8 +72,8 @@ class libzip(Barrells):
 
 class prebuild(Prebuild):
     def __init__(self):
-        self.amd64 = "ferment://libzip@libzip.tar.gz"
-        self.arm64 = "ferment://libzip@libzip.tar.gz"
+        self.amd64 = "ferment://libzip-amd64@libzip.tar.gz"
+        self.arm64 = "ferment://libzip-arm64@libzip.tar.gz"
 
     def install(self):
         subprocess.call(["cp", "-rs", f"{self.cwd}/built/*", "/usr/local/"])
