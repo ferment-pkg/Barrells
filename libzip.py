@@ -42,10 +42,6 @@ class libzip(Barrells):
                 "-DBUILD_EXAMPLES=OFF",
                 f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
             ]
-            stdout.write(
-                "Running")
-            stdout.write(
-                " ".join(["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)]))
             subprocess.call(
                 ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd, stdout=stdout, stderr=stdout
             )
@@ -53,6 +49,7 @@ class libzip(Barrells):
                             cwd=self.cwd, stdout=stdout, stderr=stdout)
             subprocess.call(["make", "install"],
                             cwd=self.cwd, stdout=stdout, stderr=stdout)
+            stdout.write(os.listdir("built"))
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
