@@ -42,7 +42,7 @@ class libzip(Barrells):
                 "-DCMAKE_INSTALL_PREFIX=built",
             ]
             subprocess.call(
-                ["cmake", "-DCMAKE_BUILD_TYPE=release", " ".join(args), "."], cwd=self.cwd, env=universalbinaryenv(), stdout=stdout, stderr=stdout
+                ["cmake", "-DCMAKE_BUILD_TYPE=release", " ".join(args), "."], cwd=self.cwd, stdout=stdout, stderr=stdout
             )
             subprocess.call(["make", f"-j{os.cpu_count()}"],
                             cwd=self.cwd, env=universalbinaryenv(), stdout=stdout, stderr=stdout)
