@@ -12,6 +12,7 @@ class libzip(Barrells):
         self.dependencies = ["cmake"]
         self.lib = True
         self.version = "1.8.0"
+        self.dualarch = True
 
     def install(self):
         args = [
@@ -59,8 +60,8 @@ class libzip(Barrells):
         test.write(
             "#include <zip.h>\nint main(){zip_t *z=zip_open(\"test.zip\",0,NULL);zip_close(z);return 0;}")
         test.close()
-        out=subprocess.call(["gcc", "-I/usr/local/include/", "-L/usr/local/lib/",
-                        "-o", "ziptest", "ziptest.c"], env=universalbinaryenv())
+        out = subprocess.call(["gcc", "-I/usr/local/include/", "-L/usr/local/lib/",
+                               "-o", "ziptest", "ziptest.c"], env=universalbinaryenv())
         if out > 0:
             print("False")
             return False
