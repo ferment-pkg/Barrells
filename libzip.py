@@ -42,13 +42,15 @@ class libzip(Barrells):
                 "-DBUILD_EXAMPLES=OFF",
                 f"--install-prefix={self.cwd}/built"
             ]
+            os.mkdir("build")
+            os.chdir("build")
             subprocess.call(
-                ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd, stdout=stdout, stderr=stdout
+                ["cmake", "..", "-DCMAKE_BUILD_TYPE=release", " ".join(args)],  stdout=stdout, stderr=stdout
             )
             subprocess.call(["make", f"-j{os.cpu_count()}"],
-                            cwd=self.cwd, stdout=stdout, stderr=stdout)
+                            stdout=stdout, stderr=stdout)
             subprocess.call(["make", "install"],
-                            cwd=self.cwd, stdout=stdout, stderr=stdout)
+                            stdout=stdout, stderr=stdout)
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
