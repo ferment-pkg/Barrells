@@ -49,9 +49,13 @@ class libzip(Barrells):
             )
             subprocess.call(["make", f"-j{os.cpu_count()}"],
                             stdout=stdout, stderr=stdout)
-            subprocess.call(["make", "install"],
+            subprocess.call(["make", f"DESTDIR={self.cwd}/built", "install"],
                             stdout=stdout, stderr=stdout)
-            print(os.listdir(self.cwd), file=stdout)
+            os.chdir("../built")
+            # move all items fromu user/local to .
+            subprocess.call(["mv", f"{self.cwd}/built/usr/local/*", "."])
+            os.remove("usr")
+            print(os.listdir("built"), file=stdout)
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
