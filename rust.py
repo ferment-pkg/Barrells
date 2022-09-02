@@ -9,6 +9,7 @@ class rust(Barrells):
         self.description = "A language empowering everyone to build reliable and efficient software"
         self.url = "interactive:sh:https://sh.rustup.rs"
         self.git = False
+        self.lib = False
         self.setup = True
         self.version="1.62"
         self.home = "https://www.rust-lang.org"

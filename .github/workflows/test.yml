@@ -46,7 +46,7 @@ jobs:
             PATH="$PATH:/Users/runner/work/Barrells/ferment" fermenter test ${changed_file%.py} --barrells=/Users/runner/work/Barrells/Barrells
           done
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
-          name: Temp Folder
-          path: /tmp/
+          name: fermenter
+          path: /tmp/fermenter

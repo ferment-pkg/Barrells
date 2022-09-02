@@ -18,13 +18,13 @@ class Barrells:
         self.sha256: str
         self.supported_OS: list[str]
         self.dependencies: list[str]
-        self.dualarch = False
         self.binary: str
         self.lib: bool
         self.setup: bool = False
         self.caveats: str
         # Provided by the cmd
         self.cwd: str
+        self.arch: str
 
     def install(self) -> bool:
         print("True")
@@ -154,3 +154,12 @@ def patch(url, dst):
     # apply the patch
     subprocess.run(
         ["patch", "-p1", dst, f"/tmp/{url.split('/')[-1]}"])
+
+
+def universalbinaryenv():
+    env = os.environ.copy()
+    env["CC"] = "clang"
+    env["CXX"] = "clang++"
+    env["CFLAGS"] = "-arch arm64 -arch x86_64"
+    env["CXXFLAGS"] = "-arch arm64 -arch x86_64"
+    return env
