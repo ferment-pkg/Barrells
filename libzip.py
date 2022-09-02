@@ -22,15 +22,13 @@ class libzip(Barrells):
             "-DENABLE_OPENSSL=OFF",
             "-DBUILD_REGRESS=OFF",
             "-DBUILD_EXAMPLES=OFF",
-            f"--install-prefix={self.cwd}/built",
+            f"--install-prefix={self.cwd}/built"
         ]
         subprocess.call(
-            ["cmake", "-B", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd
+            ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd
         )
-        subprocess.call(["cmake", "--build", "." "--", f"-j{os.cpu_count()}"],
-                        cwd=self.cwd)
-        subprocess.call(["cmake", "--install", "."],
-                        cwd=self.cwd)
+        subprocess.call(
+            ["make", "install", f"-j{os.cpu_count()}"], cwd=self.cwd)
         subprocess.call(["cp", "-rS", f"{self.cwd}/built/*", "/usr/local/"])
 
     def build(self):
@@ -42,14 +40,14 @@ class libzip(Barrells):
                 "-DENABLE_OPENSSL=OFF",
                 "-DBUILD_REGRESS=OFF",
                 "-DBUILD_EXAMPLES=OFF",
-                f"--install-prefix={self.cwd}/built",
+                f"--install-prefix={self.cwd}/built"
             ]
             subprocess.call(
-                ["cmake", "-B", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd, stdout=stdout, stderr=stdout
+                ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd, stdout=stdout, stderr=stdout
             )
-            subprocess.call(["cmake", "--build", "." "--", f"-j{os.cpu_count()}"],
+            subprocess.call(["make", f"-j{os.cpu_count()}"],
                             cwd=self.cwd, stdout=stdout, stderr=stdout)
-            subprocess.call(["cmake", "--install", "."],
+            subprocess.call(["make", "install"],
                             cwd=self.cwd, stdout=stdout, stderr=stdout)
 
     def uninstall(self) -> bool:
