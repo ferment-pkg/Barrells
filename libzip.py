@@ -56,9 +56,7 @@ class libzip(Barrells):
                 os.rename(f"{self.cwd}/built/usr/local/{dir}",
                           f"{self.cwd}/built/{dir}")
             os.remove("usr")
-           # print current directory
-            print(os.getcwd(), file=stdout)
-            print(os.listdir(), file=stdout)
+            stdout.write(os.listdir(self.cwd+"/built"))
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
@@ -86,4 +84,4 @@ class prebuild(Prebuild):
         self.arm64 = "ferment://libzip-arm64@libzip.tar.gz"
 
     def install(self):
-        subprocess.call(["cp", "-rS", f"{self.cwd}/built/*", "/usr/local/"])
+        subprocess.call(["cp", "-Rs", f"{self.cwd}/built/*", "/usr/local/"])
