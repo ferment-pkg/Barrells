@@ -6,12 +6,12 @@ from index import Barrells, Prebuild, universalbinaryenv
 
 class libzip(Barrells):
     def __init__(self):
-        self.url = "https://libzip.org/download/libzip-1.8.0.tar.gz"
+        self.url = "https://libzip.org/download/libzip-1.9.2.tar.gz"
         self.git = False
         self.description = "A C library for reading, c, and modifying zip archives"
         self.dependencies = ["cmake"]
         self.lib = True
-        self.version = "1.8.0"
+        self.version = "1.9.2"
         self.dualarch = True
         self.prebuild = prebuild()
 
@@ -22,7 +22,7 @@ class libzip(Barrells):
             "-DENABLE_OPENSSL=OFF",
             "-DBUILD_REGRESS=OFF",
             "-DBUILD_EXAMPLES=OFF",
-            f"--install-prefix={self.cwd}/built"
+            f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
         ]
         subprocess.call(
             ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd
@@ -40,7 +40,7 @@ class libzip(Barrells):
                 "-DENABLE_OPENSSL=OFF",
                 "-DBUILD_REGRESS=OFF",
                 "-DBUILD_EXAMPLES=OFF",
-                f"--install-prefix={self.cwd}/built"
+                f"-DCMAKE_INSTALL_PREFIX={self.cwd}/built"
             ]
             os.mkdir("build")
             os.chdir("build")
@@ -51,6 +51,7 @@ class libzip(Barrells):
                             stdout=stdout, stderr=stdout)
             subprocess.call(["make", "install"],
                             stdout=stdout, stderr=stdout)
+            print(os.listdir(self.cwd), file=stdout)
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
