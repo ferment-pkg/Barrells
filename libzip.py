@@ -56,6 +56,8 @@ class libzip(Barrells):
                 os.rename(f"{self.cwd}/built/usr/local/{dir}",
                           f"{self.cwd}/built/{dir}")
             os.remove("usr")
+           # print current directory
+            print(os.getcwd())
             print(os.listdir(), file=stdout)
 
     def uninstall(self) -> bool:
