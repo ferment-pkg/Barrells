@@ -28,7 +28,12 @@ class libzip(Barrells):
             ["cmake", ".", "-DCMAKE_BUILD_TYPE=release", " ".join(args)], cwd=self.cwd
         )
         subprocess.call(
-            ["make", "install", f"-j{os.cpu_count()}"], cwd=self.cwd)
+            ["make", f"DESTDIR={self.cwd}/built", "install", f"-j{os.cpu_count()}"], cwd=self.cwd)
+        for directory in ["bin", "share", "lib", "include"]:
+            os.rename(f"{self.cwd}/built/usr/local/{directory}",
+                      f"{self.cwd}/built/{directory}")
+        os.chdir(f"{self.cwd}/built")
+        os.remove("usr")
         subprocess.call(["cp", "-rS", f"{self.cwd}/built/*", "/usr/local/"])
 
     def build(self):
@@ -52,9 +57,9 @@ class libzip(Barrells):
             subprocess.call(["make", f"DESTDIR={self.cwd}/built", "install"],
                             stdout=stdout, stderr=stdout)
             os.chdir(f"{self.cwd}/built")
-            for dir in ["bin", "share", "lib", "include"]:
-                os.rename(f"{self.cwd}/built/usr/local/{dir}",
-                          f"{self.cwd}/built/{dir}")
+            for directory in ["bin", "share", "lib", "include"]:
+                os.rename(f"{self.cwd}/built/usr/local/{directory}",
+                          f"{self.cwd}/built/{directory}")
             os.remove("usr")
             stdout.write(os.listdir(self.cwd+"/built"))
 
