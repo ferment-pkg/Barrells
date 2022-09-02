@@ -55,7 +55,7 @@ class libzip(Barrells):
             # move all items fromu user/local to .
             subprocess.call(["mv", f"{self.cwd}/built/usr/local/*", "."])
             os.remove("usr")
-            print(os.listdir("built"), file=stdout)
+            print(os.listdir("."), file=stdout)
 
     def uninstall(self) -> bool:
         os.chdir(self.cwd)
