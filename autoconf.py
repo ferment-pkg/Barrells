@@ -16,11 +16,12 @@ class autoconf(Barrells):
         os.chdir(self.cwd)
         subprocess.call(["sh", "configure", f"--prefix=/usr/local/"])
         subprocess.call(["make"])
-        with open("bin/autom4te", "w+") as f:
-            content = f.read()
-            content = content.replace(
-                "/usr/local/bin/perl", "/usr/bin/perl")
-            f.write(content)
+        for file in os.listdir("bin"):
+            with open(f"bin/{file}", "w+") as f:
+                content = f.read()
+                content = content.replace(
+                    "/usr/local/bin/perl", "/usr/bin/perl")
+                f.write(content)
         subprocess.call(["make", "install"])
         return super().install()
 
@@ -49,12 +50,13 @@ class autoconf(Barrells):
                             env=env, stdout=stdout, stderr=stdout)
             subprocess.call(
                 ["make", f"-j{os.cpu_count()}"], env=env, stdout=stdout, stderr=stdout)
-            with open("bin/autom4te", "w+") as f:
-                content = f.read()
-                content = content.replace(
-                    "/usr/local/bin/perl", "/usr/bin/perl")
-                f.write(content)
-            #
+
+            for file in os.listdir("bin"):
+                with open(f"bin/{file}", "w+") as f:
+                    content = f.read()
+                    content = content.replace(
+                        "/usr/local/bin/perl", "/usr/bin/perl")
+                    f.write(content)
 
 
 class prebuild(Prebuild):
