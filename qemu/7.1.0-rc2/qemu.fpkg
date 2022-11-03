@@ -1,0 +1,22 @@
+pkgname=qemu
+alias="qemu-kvm"
+version=7.1.0-rc2
+desc="Emulator for x86 and PowerPC"
+arch="amd64","arm64"
+source="https://download.qemu.org/qemu-7.1.0-rc2.tar.xz"
+dependencies=s"pkg-config"
+Dbuild="automake", "ninja", "glib",
+license="GNU GPL"
+
+build(){
+    ./configure --disable-bsd-user --disable-guest-agent --enable-curses --enable-libssh --enable-slirp=system --enable-vde --extra-cflags=-DNCURSES_WIDECHAR=1 --disable-sdl --disable-gtk --enable-cocoa
+    make -j6
+}
+
+test(){
+    @output="command -v qemu-system-x86_64"
+    match $output != ""
+}
+install(){
+    make install
+}

@@ -1,0 +1,18 @@
+pkgname=bat
+version=0.22.1
+desc="A cat(1) clone with wings."
+arch="arch64","amd64"
+source="http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz"
+license="Apache 2.0", "MIT"
+Dbuild="rustc"
+build(){
+    cargo build --release --locked
+}
+
+test(){
+    @output="command -v bat"
+    match $output != ""
+}
+install(){
+    ln -S $PWD/target/release/bat /usr/local/bin/bat
+}

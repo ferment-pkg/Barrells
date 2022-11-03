@@ -1,0 +1,22 @@
+pkgname=bitgit
+alias="bit"
+version=1.1.2
+desc="Bit is a modern Git CLI"
+arch="universal"
+source="https://github.com/chriswalz/bit/archive/refs/tags/v1.1.2.tar.gz"
+license="Apache 2.0"
+Dbuild=go
+build(){
+
+    go build GOARCH=amd64 -o bitgit-amd64
+    go build GOARCH=arm64 -o bitgit-arm64
+    lipo -create -bit bitgit bitgit-amd64 bitgit-arm64
+}
+
+test(){
+    @output="command -v bit"
+    match $output != ""
+}
+install(){
+    ln -S $PWD/bit /usr/local/bin/bit
+}

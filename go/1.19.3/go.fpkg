@@ -1,0 +1,35 @@
+pkgname=go
+version=1.19.3
+desc="Open source programming language to build simple/reliable/efficient software"
+arch="arm64", "amd64"
+source="https://go.dev/dl/go1.19.3.src.tar.gz"
+license="BSD-3-Clause"
+build(){
+    curl -OL https://go.dev/dl/go1.19.3.darwin-amd64.tar.gz
+    tar -xzf go1.19.3.darwin-amd64.tar.gz
+    mv go bootstrap
+    cd src
+    export GOROOT_FINAL=/usr/local/go
+    export GOROOT_BOOTSTRAP=$PWD/../bootstrap
+    arm64:
+        GOOS=darwin GOARCH=arm64 ./make.bash --no-clean
+        rm -rf pkg/darwin_amd64
+        rm -rf bin/go bin/gofmt
+        mv bin/darwin_arm64/* bin
+        rm -rf bin/darwin_arm64
+
+    amd64:
+        ./make.bash --no-clean
+        cd ..
+    rm -rf bootstrap
+
+
+}
+
+test(){
+    @output="command -v go"
+    match $output != ""
+}
+install(){
+    cp -r $PWD /usr/local/go
+}

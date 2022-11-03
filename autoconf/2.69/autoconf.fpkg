@@ -1,0 +1,19 @@
+pkgname=autoconf
+version=2.69
+desc="Autoconf -- system configuration part of autotools"
+arch="universal"
+source="http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz"
+license="GNU GPL"
+
+build(){
+    ./configure --prefix=/usr/local
+    make -j4
+}
+
+test(){
+    @output="command -v autoconf"
+    match $output != ""
+}
+install(){
+    make install
+}

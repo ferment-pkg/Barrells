@@ -1,0 +1,21 @@
+pkgname=hugo
+version=0.105.0
+desc="Configurable static site generator"
+arch="universal"
+source="https://github.com/gohugoio/hugo/archive/v0.105.0.tar.gz"
+license="Apache-2.0"
+Dbuild=go
+build(){
+    go build -o hugo-arm64 -ldflags "-s -w" -tags extended GOOS=darwin GOARCH=arm64
+    go build -o hugo-amd64 -ldflags "-s -w" -tags extended
+    lipo -create hugo-arm64 hugo-amd64 -output hugo
+    rm hugo-arm64 hugo-amd64
+}
+
+test(){
+    @output="command -v hugo"
+    match $output != ""
+}
+install(){
+    ln -s $PWD/hugo /usr/local/bin/hugo
+}

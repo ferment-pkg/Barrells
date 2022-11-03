@@ -1,0 +1,19 @@
+pkgname=cmake
+version=3.25.0-rc3
+desc="Cross-platform build system"
+arch="universal"
+source="https://github.com/Kitware/CMake/releases/download/v3.25.0-rc3/cmake-3.25.0-rc3.tar.gz"
+license="BSD 3-Clause"
+Dbuild=go
+build(){
+    ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
+    make
+}
+
+test(){
+    @output="command -v cmake"
+    match $output != ""
+}
+install(){
+    make install
+}

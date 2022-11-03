@@ -1,0 +1,19 @@
+pkgname=automake
+version=1.16.5
+desc="Automake -- Makefile Generator"
+arch="universal"
+source="https://mirror.freedif.org/GNU/automake/automake-1.16.5.tar.gz"
+license="GNU GPL"
+dependencies=autoconf
+build(){
+    ./configure --prefix=/usr/local
+    make -j4
+}
+
+test(){
+    @output="command -v automake"
+    match $output != ""
+}
+install(){
+    make install
+}
