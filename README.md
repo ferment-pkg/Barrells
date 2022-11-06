@@ -50,8 +50,8 @@ install(){
 
 ## Important Commands
 ### Universal Envs for Clang
-Use these envs to create universal binaries on build for macos, place all of thes eon the same line as `make`
-```
+If universal is set as an arc any other set archs will be ignored, the fermenter(package builder) will add the following envs to the build script
+```bash
 CC = "clang"
 
 CXX = "clang++"
@@ -60,3 +60,4 @@ CFLAGS = "-arch arm64 -arch x86_64"
 
 CXXFLAGS = "-arch arm64 -arch x86_64"
 ```
+These flags will allow for universal binaries to be built, make sure that your package can work as a universal binary.

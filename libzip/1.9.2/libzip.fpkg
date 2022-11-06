@@ -1,0 +1,22 @@
+pkgname=libzip
+version=1.9.2
+desc="A C library for reading, creating, and modifying zip and zip64 archives"
+arch="universal"
+source="https://github.com/nih-at/libzip/releases/download/v1.9.2/libzip-1.9.2.tar.gz"
+license="BSD-3-Clause"
+Dbuild=cmake
+build(){
+    mkdir build
+    cd build
+    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
+    make -j4
+}
+
+test(){
+    @output="ls /usr/local/lib/libzip.dylib"
+    match $output != "ls: cannot access '/usr/local/lib/libzip.dylib': No such file or directory"
+}
+install(){
+    cd build
+    make install
+}

@@ -1,0 +1,19 @@
+pkgname=ncurses
+version=6.3
+desc="It is a toolkit for developing GUI-like application software that runs under a terminal emulator. "
+arch="universal"
+source="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.3.tar.gz"
+license="X11 License"
+Dbuild=cmake
+build(){
+    ./configure --prefix=/usr/local --with-shared --enable-pc-files
+    make -j4
+}
+
+test(){
+    @output="ls /usr/local/lib/libncurses.dylib"
+    match $output != "ls: cannot access '/usr/local/lib/libncurses.dylib': No such file or directory"
+}
+install(){
+    make install
+}
