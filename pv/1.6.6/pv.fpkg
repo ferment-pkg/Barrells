@@ -1,0 +1,19 @@
+pkgname=pv
+version=1.6.6
+desc="Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline"
+arch="universal"
+source="https://github.com/icetee/pv/archive/refs/tags/v1.6.6.tar.gz"
+license="Artistic License 2.0"
+Dbuild=autoconf,automake
+build(){
+    ./configure --prefix=/usr/local
+    make -j4
+}
+
+test(){
+    @output="command -v pv"
+    match $output != ""
+}
+install(){
+    make install
+}

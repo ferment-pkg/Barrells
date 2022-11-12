@@ -1,0 +1,24 @@
+pkgname=pyenv
+version=2.3.6
+desc="Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline"
+arch="universal"
+source="https://github.com/pyenv/pyenv/archive/refs/tags/v2.3.6.tar.gz"
+license="Artistic License 2.0"
+Dbuild=autoconf,automake
+caveats="Open a new terminal to start using oyenv"
+build(){
+    sh ./src/configure
+    make -j4 -C src
+}
+
+test(){
+    @output="command -v pyenv"
+    match $output != ""
+}
+install(){
+    #add a line to the .zshrc
+    make install
+    fileMan append $HOME/.zshrc export PYENV_ROOT="/usr/local/ferment/Installed/pyenv"
+    fileMan append $HOME/.zshrc export PATH="$PYENV_ROOT/bin:$PATH"
+    fileMan append $HOME/.zshrc eval "$(pyenv init -)"
+}

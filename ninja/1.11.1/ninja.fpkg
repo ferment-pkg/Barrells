@@ -1,0 +1,19 @@
+pkgname=ninja
+version=1.11.1
+desc="Ninja is a small build system with a focus on speed."
+arch="universal"
+source="https://github.com/ninja-build/ninja/archive/refs/tags/v1.11.1.tar.gz"
+license="Apache-2.0"
+Dbuild=cmake
+build(){
+    cmake -B build . -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES=arm64;x86_64
+    cmake --build build
+}
+
+test(){
+    @output="command -v ninja"
+    match $output != ""
+}
+install(){
+    ln -s $PWD/build/ninja /usr/local/bin/ninja
+}

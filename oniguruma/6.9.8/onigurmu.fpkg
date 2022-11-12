@@ -1,0 +1,20 @@
+pkgname=oniguruma
+version=6.9.8
+desc="Oniguruma is a modern and flexible regular expressions library. "
+arch="universal"
+source="https://github.com/kkos/oniguruma/archive/refs/tags/v6.9.8.tar.gz"
+license="BSD License"
+Dbuild=autoconf,automake
+build(){
+    autoreconf -vfi
+    ./configure --prefix=/usr/local
+    make -j4
+}
+
+test(){
+    @output="command -v onig-conf"
+    match $output != ""
+}
+install(){
+    make install
+}

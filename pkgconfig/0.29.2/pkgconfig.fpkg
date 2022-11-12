@@ -1,0 +1,21 @@
+pkgname=pkgconfig
+alias=pkg-config
+version=0.9.2
+desc="pkg-config is a computer program that defines and supports a unified interface for querying installed libraries for the purpose of compiling software that depends on them"
+arch="universal"
+source="https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
+license="GNU GPL"
+Dbuild=autoconf,automake
+build(){
+    ./configure --prefix=/usr/local
+    make -j4
+}
+
+test(){
+    @output="command -v pkg-config"
+    match $output != ""
+}
+install(){
+    make install
+    mkdir /usr/local/lib/pkgconfig
+}
