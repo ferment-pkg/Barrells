@@ -1,0 +1,18 @@
+pkgname=tldr
+version=1.4.3
+desc="A command line client for tldr"
+arch="universal"
+source="https://github.com/tldr-pages/tldr-c-client/archive/refs/tags/v1.5.0.tar.gz"
+license="MIT"
+Dbuild=libzip, pkg-config
+build(){
+    make -j4
+}
+
+test(){
+    @output="command -v task"
+    match $output != ""
+}
+install(){
+    make install
+}

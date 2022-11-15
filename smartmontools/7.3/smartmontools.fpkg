@@ -1,0 +1,22 @@
+pkgname=smartmontools
+alias=smartctl,smartd
+version=7.3
+desc="Control and monitor storage systems using the Self-Monitoring, Analysis and Reporting Technology System (SMART) "
+arch="universal"
+source="https://github.com/smartmontools/smartmontools/archive/refs/tags/RELEASE_7_3.tar.gz"
+license="GNU GPL 2.0"
+Dbuild=automake,autoconf
+build(){
+    mkdir build
+    cd build
+    ../configure
+    make -j4
+}
+
+test(){
+    @output="command -v smartctl"
+    match $output != ""
+}
+install(){
+    make install
+}

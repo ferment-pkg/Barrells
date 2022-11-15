@@ -5,7 +5,7 @@ desc="Emulator for x86 and PowerPC"
 arch="amd64","arm64"
 source="https://download.qemu.org/qemu-7.1.0-rc2.tar.xz"
 dependencies=s"pkg-config"
-Dbuild="automake", "ninja", "glib",
+Dbuild="automake", "ninja"
 license="GNU GPL"
 
 build(){

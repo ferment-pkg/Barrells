@@ -1,0 +1,24 @@
+pkgname=sdl2
+version=2.24.2
+desc="Simple DirectMedia Layer is a cross-platform development library designed to provide low level access to audio, keyboard, mouse, joystick, and graphics hardware via OpenGL and Direct3D"
+arch="universal"
+source="https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.24.2.tar.gz"
+license="Zlib License"
+Dbuild=cmake,ninja
+caveats="Open a new terminal to start using pyenv"
+build(){
+    mkdir build
+    $ARGS="-DCMAKE_BUILD_TYPE=Release"
+    cmake -B build . $ARGS -GNinja
+    cmake --build build -- -j4
+
+}
+
+test(){
+    @output="command -v sdl-config"
+    match $output != ""
+}
+install(){
+    #add a line to the .zshrc
+    cmake --install build
+}

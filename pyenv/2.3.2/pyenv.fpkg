@@ -1,11 +1,11 @@
 pkgname=pyenv
 version=2.3.2
-desc="Pipe Viewer - is a terminal-based tool for monitoring the progress of data through a pipeline"
+desc="pyenv lets you easily switch between multiple versions of Python. It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well."
 arch="universal"
 source="https://github.com/pyenv/pyenv/archive/refs/tags/v2.3.2.tar.gz"
-license="Artistic License 2.0"
+license="MIT License"
 Dbuild=autoconf,automake
-caveats="Open a new terminal to start using oyenv"
+caveats="Open a new terminal to start using pyenv"
 build(){
     sh ./src/configure
     make -j4 -C src
