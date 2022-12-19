@@ -48,6 +48,9 @@ install(){
 | --- | --- | ---|
 | `match` | Matches two strings or numbers (TEST SECTION ONLY) | "item1" "operator" "item2"
 | `fileman` | Edit or write to a file | "`append`, `write`" "content"
+## Supported Compilers or Buildtools (For Universal Builds)
+Compilers: `clang`, `clang++`, `cargo`
+Buildtools: `cmake`, `autotools`
 
 ## Important Commands
 ### Universal Envs for Clang
