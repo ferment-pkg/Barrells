@@ -46,7 +46,8 @@ install(){
 
 | Command | Description | Arguments
 | --- | --- | ---|
-| `match` | Matches two strings or numbers | "item1" "operator" "item2"
+| `match` | Matches two strings or numbers (TEST SECTION ONLY) | "item1" "operator" "item2"
+| `fileman` | Edit or write to a file | "append|write" "content"
 
 ## Important Commands
 ### Universal Envs for Clang
