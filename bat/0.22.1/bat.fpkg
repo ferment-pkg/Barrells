@@ -14,5 +14,5 @@ test(){
     match $output != ""
 }
 install(){
-    ln -S $PWD/target/release/bat /usr/local/bin/bat
+    ln -S $PWD/target/release/bat usr/local/bin/bat
 }
