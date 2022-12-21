@@ -12,11 +12,14 @@ build(){
     export GOROOT_FINAL=/usr/local/go
     export GOROOT_BOOTSTRAP=$PWD/../bootstrap
     arm64:
-        GOOS=darwin GOARCH=arm64 ./make.bash --no-clean
+        $GOOS=darwin
+        $GOARCH=arm64
+        ./make.bash --no-clean
         rm -rf pkg/darwin_amd64
         rm -rf bin/go bin/gofmt
         mv bin/darwin_arm64/* bin
         rm -rf bin/darwin_arm64
+
 
     amd64:
         ./make.bash --no-clean
@@ -31,5 +34,5 @@ test(){
     match $output != ""
 }
 install(){
-    cp -r $PWD /usr/local/go
+    cp -r $PWD usr/local/go
 }

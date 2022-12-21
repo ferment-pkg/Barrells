@@ -18,5 +18,5 @@ test(){
     match $output != ""
 }
 install(){
-    ln -S $PWD/bit /usr/local/bin/bit
+    cp $PWD/bit usr/local/bin/bit
 }

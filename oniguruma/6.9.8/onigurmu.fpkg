@@ -7,7 +7,7 @@ license="BSD License"
 Dbuild=autoconf,automake
 build(){
     autoreconf -vfi
-    ./configure --prefix=/usr/local
+    ./configure --prefix=usr/local
     make -j4
 }
 

@@ -8,7 +8,7 @@ Dbuild=autoconf,automake,pkg-config
 dependencies=ncurses
 build(){
     ./autogen.sh
-    ./configure --prefix=/usr/local
+    ./configure --prefix=usr/local
     make -j4
 }
 

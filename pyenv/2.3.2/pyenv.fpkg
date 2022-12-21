@@ -17,6 +17,7 @@ test(){
 }
 install(){
     #add a line to the .zshrc
+    $DESTDIR=usr/local
     make install
     fileMan append $HOME/.zshrc export PYENV_ROOT="/usr/local/ferment/Installed/pyenv"
     fileMan append $HOME/.zshrc export PATH="$PYENV_ROOT/bin:$PATH"

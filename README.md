@@ -51,7 +51,16 @@ install(){
 ## Supported Compilers or Buildtools (For Universal Builds)
 Compilers: `clang`, `clang++`
 Buildtools: `cmake`, `autotools`
+## Build Rules
+When writing the install/build code you must make sure the build prefix is `usr/local`.
 
+Example: 
+
+`./configure --prefix=usr/local`
+
+`cmake -DCMAKE_INSTALL_PREFIX=usr/local .`
+
+If your are writing a binary or a lib without a buildtool then set the output to `usr/local/bin` or `usr/local/lib` respectively.
 ## Important Commands
 ### Universal Envs for Clang
 If universal is set as an arc any other set archs will be ignored, the fermenter(package builder) will add the following envs to the build script

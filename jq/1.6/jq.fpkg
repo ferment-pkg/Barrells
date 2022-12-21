@@ -6,7 +6,7 @@ source="https://github.com/stedolan/jq/releases/download/jq-1.6/jq-1.6.tar.gz"
 license="MIT"
 Dbuild=autoconf,automake
 build(){
-    ./configure --disable-dependency-tracking --disable-silent-rules --disable-maintainer-mode
+    ./configure --prefix=usr/local --disable-dependency-tracking --disable-silent-rules --disable-maintainer-mode
     make -j4
 }
 

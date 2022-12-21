@@ -6,7 +6,7 @@ source="https://github.com/Kitware/CMake/releases/download/v3.25.0-rc3/cmake-3.2
 license="BSD 3-Clause"
 Dbuild=go
 build(){
-    ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release
+    ./bootstrap -- -DCMAKE_BUILD_TYPE:STRING=Release -DCMAKE_INSTALL_PREFIX=usr/local
     make
 }
 

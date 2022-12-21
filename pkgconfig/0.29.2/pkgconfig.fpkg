@@ -7,7 +7,7 @@ source="https://pkgconfig.freedesktop.org/releases/pkg-config-0.29.2.tar.gz"
 license="GNU GPL"
 Dbuild=autoconf,automake
 build(){
-    ./configure --prefix=/usr/local
+    ./configure --prefix=usr/local
     make -j4
 }
 

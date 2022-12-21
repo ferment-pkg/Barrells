@@ -14,5 +14,6 @@ test(){
     match $output != ""
 }
 install(){
+    $DESTDIR=usr/local
     make install
 }

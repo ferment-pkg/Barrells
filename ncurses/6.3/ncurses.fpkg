@@ -6,7 +6,7 @@ source="https://ftp.gnu.org/pub/gnu/ncurses/ncurses-6.3.tar.gz"
 license="X11 License"
 Dbuild=cmake
 build(){
-    ./configure --prefix=/usr/local --with-shared --enable-pc-files
+    ./configure --prefix=usr/local --with-shared --enable-pc-files
     make -j4
 }
 

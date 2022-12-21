@@ -9,7 +9,7 @@ Dbuild="automake", "ninja"
 license="GNU GPL"
 
 build(){
-    ./configure --disable-bsd-user --disable-guest-agent --enable-curses --enable-libssh --enable-slirp=system --enable-vde --extra-cflags=-DNCURSES_WIDECHAR=1 --disable-sdl --disable-gtk --enable-cocoa
+    ./configure --prefix=usr/local --disable-bsd-user --disable-guest-agent --enable-curses --enable-libssh --enable-slirp=system --enable-vde --extra-cflags=-DNCURSES_WIDECHAR=1 --disable-sdl --disable-gtk --enable-cocoa
     make -j6
 }
 

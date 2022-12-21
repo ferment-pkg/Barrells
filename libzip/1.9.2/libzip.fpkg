@@ -6,9 +6,7 @@ source="https://github.com/nih-at/libzip/releases/download/v1.9.2/libzip-1.9.2.t
 license="BSD-3-Clause"
 Dbuild=cmake
 build(){
-    mkdir build
-    cd build
-    cmake -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local ..
+    cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=usr/local -DCMAKE_INSTALL_PREFIX=/usr/local ..
     cmake --build build -- -j4
 }
 
@@ -17,6 +15,5 @@ test(){
     match $output != "ls: cannot access '/usr/local/lib/libzip.dylib': No such file or directory"
 }
 install(){
-    cd build
-    cmake --install .
+    cmake --install build
 }

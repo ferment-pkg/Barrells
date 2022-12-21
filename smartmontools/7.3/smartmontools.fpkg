@@ -9,7 +9,7 @@ Dbuild=automake,autoconf
 build(){
     mkdir build
     cd build
-    ../configure
+    ../configure --prefix=usr/local
     make -j4
 }
 

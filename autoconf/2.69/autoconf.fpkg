@@ -6,7 +6,7 @@ source="http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz"
 license="GNU GPL"
 
 build(){
-    ./configure --prefix=/usr/local
+    ./configure --prefix=usr/local
     make -j4
 }
 

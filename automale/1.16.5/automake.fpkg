@@ -6,7 +6,7 @@ source="https://mirror.freedif.org/GNU/automake/automake-1.16.5.tar.gz"
 license="GNU GPL"
 dependencies=autoconf
 build(){
-    ./configure --prefix=/usr/local
+    ./configure --prefix=usr/local
     make -j4
 }
 

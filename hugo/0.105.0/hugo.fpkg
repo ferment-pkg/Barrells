@@ -8,7 +8,7 @@ Dbuild=go
 build(){
     go build -o hugo-arm64 -ldflags "-s -w" -tags extended GOOS=darwin GOARCH=arm64
     go build -o hugo-amd64 -ldflags "-s -w" -tags extended
-    lipo -create hugo-arm64 hugo-amd64 -output hugo
+    lipo -create hugo-arm64 hugo-amd64 -output usr/local/binhugo
     rm hugo-arm64 hugo-amd64
 }
 
@@ -17,5 +17,5 @@ test(){
     match $output != ""
 }
 install(){
-    ln -s $PWD/hugo /usr/local/bin/hugo
+    ln -s $PWD/usr/local/bin/hugo /usr/local/bin/hugo
 }

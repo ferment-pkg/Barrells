@@ -8,7 +8,7 @@ Dbuild=cmake,ninja
 caveats="Open a new terminal to start using pyenv"
 build(){
     mkdir build
-    $ARGS="-DCMAKE_BUILD_TYPE=Release"
+    $ARGS="-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=usr/local"
     cmake -B build . $ARGS -GNinja
     cmake --build build -- -j4
 
